@@ -3,7 +3,7 @@
 //end point du register qui demande une méthode POST avec un json
 require_once("init_pdo.php");
 
-function registerUser($db, $json){ //demande un json avec nom, prenom, année de naissance, email, password, Sexe, Sport
+function registerUser($db, $json){ //rajouter quelque chose pour que le mot de passe soit déjà en md5 sinon on renvois 400
     $data = json_decode($json);
     if((isset($data->password)) && (isset($data->year)) && (isset($data->email)) && (isset($data->sexe)) && (isset($data->sport)) && (isset($data->prenom))  && (isset($data->name))){
         $sql_check = "SELECT NOM_UTILISATEUR FROM `utilisateur` WHERE email = :email"; //à adapter si besoin
@@ -23,8 +23,8 @@ function registerUser($db, $json){ //demande un json avec nom, prenom, année de
             $exe_check->bindParam(':password', $data->password, PDO::PARAM_STR);
             $exe_check->execute();
             $res_check = $exe_check->fetchAll(PDO::FETCH_OBJ);
-            return 200; //OK l'utilisateur est créé
-            //rajouter un try and catch avec try le return 200 et catch un return 500 en disant qu'on peut pas faire la requête SQM
+            return 201; //OK l'utilisateur est créé
+            //rajouter un try and catch avec try le return 200 et catch un return 500 en disant qu'on peut pas faire la requête SQL
         }
         return 409; //code conflict donc pas possible de le créer car l'email est déjà utilisé
     }
@@ -35,25 +35,4 @@ function setHeaders() {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
     header("Access-Control-Allow-Origin: *");
     header('Content-type: application/json; charset=utf-8');
-    }
-
-switch($_SERVER["REQUEST_METHOD"]) {
-    /*case 'GET':
-        $result = loginUser($pdo, json : file_get_contents('php://input'));
-        setHeaders();
-        exit(json_encode(value: $result));
-    */
-    case 'POST':
-        $result = registerUser($pdo, json: file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        exit(json_encode(value: $result));
-    /*case 'PUT':
-        $result = update_users($pdo, json: file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        exit(json_encode(value: $result));
-    case 'DELETE':
-        $result = delete_users($pdo, json: file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        exit(json_encode(value: $result));
-        */
     }
