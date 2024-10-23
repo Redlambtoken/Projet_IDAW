@@ -1,0 +1,4 @@
+Pour l'API calendeat, voir avec Suzanne-Léonore comment rendre ça sécurisé pour empêcher les requêtes manuelles (requête GET et POST)
+Demander pour savoir si Suzanne Léonore souhaite faire des requêtes PUT et DELETE
+
+//la sécurisation contre les requêtes manuelles devraient être la solution pour sélectionner les bons repas
