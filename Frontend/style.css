@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    background-color: brown;
+}
+
+.row{
+    flex-direction: row;
+}
+
+.reverse-row{
+    flex-direction: row-reverse;
+}
+
+.footer{
+    display:flex;
+    flex-wrap: wrap;
+    background-color: green;
+    text-align: center;
+    flex-direction: column;
+}
+
+.contenu{
+    display: block;
+}
+
+h1{
+    font-size:medium;
+    font-weight: bold;
+}
+
+h2{
+    font-size: small;
+    font-style: italic;
+}
+
+h3{
+    color: grey;
+    font-size: small;
+    font-style: italic;
+}
