@@ -25,29 +25,3 @@ function setHeaders() {
     header("Access-Control-Allow-Origin: *");
     header('Content-type: application/json; charset=utf-8');
     }
-
-switch($_SERVER["REQUEST_METHOD"]) {
-    case 'GET':
-        $result = loginUser($pdo, json : file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        setHeaders();
-        exit(json_encode(value: $result));
-    /*case 'POST':
-        $result = create_users($pdo, json: file_get_contents('php://input'));
-        if($result != 400 && $result != 409){
-            http_response_code(response_code: 200);
-        }
-        else {
-            http_response_code(response_code: $result);
-        }
-        exit(json_encode(value: $result));
-    case 'PUT':
-        $result = update_users($pdo, json: file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        exit(json_encode(value: $result));
-    case 'DELETE':
-        $result = delete_users($pdo, json: file_get_contents('php://input'));
-        http_response_code(response_code: $result);
-        exit(json_encode(value: $result));
-        */
-    }
