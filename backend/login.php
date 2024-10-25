@@ -20,6 +20,15 @@ function loginUser($db, $json){
     return 400; //pas de login et/ou de password
 }
 
+function modifyPassworUser($db, $json){
+    $data = json_decode($json);
+    if(isset($data->email)){ //voir pour les jsons afin que ça soit des json différent
+        //vérifier si l'email existe bel et bien
+    }
+    
+
+}
+
 function setHeaders() {
     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
     header("Access-Control-Allow-Origin: *");
