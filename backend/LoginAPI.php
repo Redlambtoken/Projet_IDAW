@@ -13,4 +13,9 @@ switch($_SERVER["REQUEST_METHOD"]) {
         $result = registerUser($pdo, json: file_get_contents('php://input'));
         http_response_code(response_code: $result);
         exit(json_encode(value: $result));
+    case 'PUT':
+        $result = modifyPassworUser($pdo, json: file_get_contents('php://input'));
+        http_response_code(response_code: $result);
+        exit(json_encode(value: $result));
     }
+    //rajouter un PUT pour modifier le mdp, premier Envois de PUT pour savoir si l'utilisateur existe et ensuite je reçois un nouveau PUT pour modifier le mdp
