@@ -7,5 +7,10 @@
         <h1>Où nous retrouver</h1>
         <img src="chemin/vers/image.jpg" alt="ImageInsta" width="300">
     </div>
+    <script>
+        <?php
+            require_once("scripts.js");
+        ?>
+    </script>
     </body>
 </html>
