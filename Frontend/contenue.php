@@ -4,9 +4,10 @@
         <script>
             $(document).ready(function(){
                 $.ajax({ 
-                    url: "backend/avisAPI.php",
+                    url: "avisAPI.php",
                     method: "GET",
                     dataType : "json",
+                    
                     success: function(data{
                        $('#avis').append() 
                     })

@@ -22,6 +22,7 @@
                     <li class="sidebar-nav-item"><a href="connected.php">Connection</a></li>
                     <li class="sidebar-nav-item"><a href="accueil.php#milieu">A propos de nous</a></li>
                     <li class="sidebar-nav-item"><a href="$pageActuel#bas">Nous Contacter</a></li>
+                    <li class="sidebar-nav-item"><a href="creation.php">Créer mon Compte</a></li>
                 </ul>
             </nav>       
         </div>
