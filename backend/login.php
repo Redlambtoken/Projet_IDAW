@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //end point du login qui demande un get avec un json en param avec un hash md5
 require_once("init_pdo.php");
 
@@ -24,12 +24,18 @@ function loginUser($db, $json){
 }
 
 function modifyPassworUser($db, $json){
+    //premier json avec adresse mail pour envoyer le mail avec un nouveau mot de passe pour le gars et une fois qu"il se connecte il peut changer de mdp
+    //faire la génération d'un nouveau mdp
     $data = json_decode($json);
-    if(isset($data->email)){ //voir pour les jsons afin que ça soit des json différent
-        //vérifier si l'email existe bel et bien
+    if(isset($data->password) && $_SESSION["user_id"] != null){
+        $sql = "UPDATE `utilisateur` SET `PASSWORD`= :Newpassword WHERE ID_UTILISATEUR = :userID";
+        $exe = $db->prepare($sql);
+        $exe->bindParam(':Newpassword', $data->password, PDO::PARAM_STR);
+        $exe->bindParam(':userID', $_SESSION["user_id"], PDO::PARAM_INT);
+        $exe->execute();
+        return 200;
     }
-    
-
+    return 400;
 }
 
 function setHeaders() {
