@@ -1,8 +1,4 @@
-<?php
 
-    require_once('header.php');
-
-    echo '
     <table>
         <form id="Création de compte" action="" method="POST">
             <div class="form-group row">
@@ -42,7 +38,7 @@
                 </div>
                 <br>
                 <br>
-                <label for="sexe">Sexe : </label>
+                <label for="sexe">Sexe* : </label>
                 <select id="sexe" name="sexe">
                     <option value="0">Insérer valeur</option>
                     <option value="1">Femme</option>
@@ -51,7 +47,7 @@
                 </select>
                 <br>
                 <br>
-                <label for="sport">Sport : </label>
+                <label for="sport">Sport* : </label>
                 <select id="sport" name="sport">
                     <option value="0">Insérer valeur</option>
                     <option value="1">Bas</option>
@@ -69,6 +65,41 @@
         </form>
     </table>
     <br>
-    ';
 
-    require_once('footer.php');
+    
+    <script>
+            $(document).ready(function(){
+                $.ajax({ 
+                    url: "LoginAPI.php",
+                    method: "POST",
+                    dataType : "json",
+                    data: {
+                        sexe : $("#inputSexe").val(),
+                        sport : $("#inputSport").val(),
+                        name : $("#inputNom").val(),
+                        prenom : $("#inputPrenom").val(),
+                        year : $("#inputDate").val(),
+                        email : $("#inputEmail").val(),
+                        password : $("#inputPwd2").val()
+                    }
+                    
+                    success: function(data{
+                       $(\'#avis\').append() 
+                    })
+                    error: function(xhr, status, error) {
+                        console.error("Erreur lors de la requête AJAX : " + error);
+                    }
+                })
+
+                //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                .done(function(response){
+                    let data = JSON.stringify(response);
+                    $("div#res").append(data);
+                })
+
+                //Ce code sera exécuté en cas d\'échec - L\'erreur est passée à fail()
+                .fail(function(error){
+                    alert("La requête s\'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
+            });
+        </script>

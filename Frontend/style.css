@@ -40,8 +40,19 @@ body {
     flex-direction: column;
 }
 
+#avis{
+    display:flex;
+    flex-wrap: wrap;
+    background-color: #0dcaf0;
+    width: 300px;
+    text-align: center;
+    flex-direction: column;
+}
+
 .contenu{
-    display: block;
+  display : flex;
+  background-color: #114d5f;
+  height: 30px;
 }
 
 h1{

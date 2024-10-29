@@ -1,9 +1,4 @@
-<?php
-    $pageActuel="connected.php";
-    require_once('header.php');
-
-
-echo '<form id="login_form" action="" method="POST">
+<form id="login_form" action="" method="POST">
     <table>
         <tr>
             <th>Login :</th>
@@ -46,9 +41,7 @@ $(document).ready(function(){
         console.log(tb);
     });
 });
-</script>';
-
-    require_once('footer.php');
+</script>
 
 
 
