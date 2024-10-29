@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("init_pdo.php");
-require_once("calendeat.php");
+require_once("recettes.php");
  function setHeaders() {
  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
  header("Access-Control-Allow-Origin: *");
@@ -14,20 +14,19 @@ require_once("calendeat.php");
  // ==============
  switch($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        $result = getEat($pdo);
+        $result = getRecette($pdo); //il y aura beaucoup de conditio sur le get donc un peu long
         setHeaders();
         exit(json_encode(value: $result));
-    case 'POST': //ici il ne marche pas car il faut mettre en place les jetons JWT
-        $result = createEat($pdo, json: file_get_contents('php://input'));
+    case 'POST': //Jeton JWT à rajouter pour savoir lesquelles ajouter sur le compte
+        $result = createRecette($pdo, json: file_get_contents('php://input'));
         http_response_code(response_code: $result);
         exit(json_encode(value: $result));
-    /*case 'PUT':
+    /*case 'PUT'://Jeton JWT à rajouter pour savoir lesquelles changer
         $result = update_users($pdo, json: file_get_contents('php://input'));
         http_response_code(response_code: $result);
         exit(json_encode(value: $result));
-    case 'DELETE':
+    case 'DELETE': //Jeton JWT à rajouter pour savoir lesquelles enlever
         $result = deleteEat($pdo, json: file_get_contents('php://input'));
         http_response_code(response_code: $result);
         exit(json_encode(value: $result));*/
-        
     }

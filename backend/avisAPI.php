@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //end point du login qui demande un get avec un json en param avec un hash md5
 require_once("init_pdo.php");
 require_once("avis.php");
