@@ -7,10 +7,6 @@
         <h1>Où nous retrouver</h1>
         <img src="chemin/vers/image.jpg" alt="ImageInsta" width="300">
     </div>
-    <script>
-        <?php
-            require_once("scripts.js");
-        ?>
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     </body>
 </html>

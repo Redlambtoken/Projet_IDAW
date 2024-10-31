@@ -16,14 +16,11 @@
                 <nav id="sidebar-wrapper">
                     <ul class="sidebar-nav"> 
                         <li class="sidebar-brand"><a href="$pageActuel.php#haut"> </a></li>
-                        <li class="sidebar-nav-item"><a href="pageAccueil.php">Accueil</a></li>
-                        <li class="sidebar-nav-item"><a href="pageConnection.php">Connection</a></li>
-                        <li class="sidebar-nav-item"><a href="pageAccueil.php#milieu">A propos de nous</a></li>
+                        <li class="sidebar-nav-item"><a href="pageCompte.php">Accueil</a></li>
+                        <li class="sidebar-nav-item"><a href="creationRecette.php">Créer une recette</a></li>
+                        <li class="sidebar-nav-item"><a href="creationRepas.php">Ajouter un repas</a></li>
                         <li class="sidebar-nav-item"><a href="$pageActuel#bas">Nous Contacter</a></li>
-                        <li class="sidebar-nav-item"><a href="pageCreation.php">Créer mon Compte</a></li>
                     </ul>
                 </nav>
             </div>      
         </div>
-
-    

@@ -8,33 +8,29 @@
 </div>
 
 <script>
-            $(document).ready(function(){
-                $.ajax({ 
-                    url: "avisAPI.php",
-                    method: "GET",
-                    dataType : "json",
-                    
-                    success: function(data{
-                        let response =JSON.parse(data);
-                        console.log(response);
-                        $('#avis').append(response); 
-                    })
-                    error: function(xhr, status, error) {
-                        console.error("Erreur lors de la requête AJAX : " + error);
-                    }
-                })
+    $(document).ready(function(){
+        $.ajax({
+            url: 'avisAPI.php', // URL du script PHP
+            method: 'GET', // Méthode GET pour récupérer des données
+            dataType: 'json', // Type de données attendu
+            success: function(data) {
+                // Vérifier s'il y a une erreur
+                if (data.error) {
+                    alert("Erreur : " + data.error);
+                    return;
+                }
 
+                // Vider le conteneur avant d'afficher les nouvelles données
+                $('#dataContainer').empty();
 
-
-                /*Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                .done(function(response){
-                    let data = JSON.stringify(response);
-                    $("div#res").append(data);
-                })
-
-                //Ce code sera exécuté en cas d'échec - L'erreur est passée à fail()
-                .fail(function(error){
-                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-                })*/
-            });
-        </script>
+                // Afficher les données dans le conteneur
+                data.forEach(function(item) {
+                    $('#dataContainer').append('<p>' + item.nom_colonne + '</p>'); // Remplacez 'nom_colonne' par le nom de la colonne de votre table
+                });
+            },
+            error: function() {
+                alert("Une erreur est survenue lors de la récupération des données.");
+            }
+        });
+    });
+</script>
