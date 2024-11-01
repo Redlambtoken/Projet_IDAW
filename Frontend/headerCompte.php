@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="scripts.js"></script>
+        <script src="menuDeroulant.css"></script>
     <body>
 
         <div id ="haut" class="header">

@@ -20,7 +20,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
             http_response_code(response_code: $result);
         }
         setHeaders();
-        exit(json_encode(value: $result));
+        exit(json_encode($result));
     case 'POST':
         $result = createAvis($pdo, json: file_get_contents('php://input'));
         if($result != 400){
