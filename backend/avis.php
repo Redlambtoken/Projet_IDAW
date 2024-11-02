@@ -8,7 +8,6 @@ function getAvis($db){
         if($res_check != null){
             return $res_check; //OK l'utilisateur existe bel et bien
         }
-        //
     return 404;
 }
 
