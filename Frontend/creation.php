@@ -1,6 +1,6 @@
 
     <table>
-        <form id="Création de compte" action="" method="POST">
+        <form id="créationCompte" action="" method="POST">
             <div class="form-group row">
                 <tr>
                 <label for="inputNom" class="col-sm-2 col-form-label">Nom*</label>
