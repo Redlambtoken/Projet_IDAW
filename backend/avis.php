@@ -1,7 +1,7 @@
 <?php 
 
 function getAvis($db){
-        $sql_check = "SELECT `Text`, `nameAuteur` FROM `avis` WHERE 1";
+        $sql_check = "SELECT `Text`, `ID_UTILISATEUR` FROM `avis` WHERE 1";
         $exe_check = $db->prepare($sql_check);
         $exe_check->execute();
         $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
