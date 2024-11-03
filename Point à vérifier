@@ -1,0 +1,25 @@
+On a dans la bdd : 
+est compose de -> ID aliment, ID nutriment, POURCENTAGE
+fait de -> ID aliment, ID recette, Quantite
+
+Ce qui n'est plus à jour
+
+Je propose de fusioner les deux talbes pour avoir :
+TITLE -> ID recette, ID nutriment, Quantite (la table ferait)
+
+cuisson n'est plus nécessaire parce que c'est and les nourriture
+
+
+Repas associé à une recette (on n'en a pas)
+Recette associé à de la nourriture (on en a mais c'est aussi des recettes)
+Donc proposition : associé directement les Repas avec la nourriture, un repas sera associé à plusieurs nourriture s'il mange pas mal le bougre
+
+Objectif : 
+Repas associé avec nourriture(s)
+nourriture associé avec plusieurs nutriments
+
+Table à changer 
+UPDATE contient pour avoir ID_nourriture à la place de ID_recette
+UPDATE la fusion des deux tables en haut
+
+Voir avec Nathan Crincket pour la bdd de ce qu'on a besoin quotidiennement
