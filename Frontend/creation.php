@@ -65,12 +65,14 @@
         </form>
     </table>
     <br>
-    <div id="texte">
-
-    </div>
+    <div id="texte"></div>
 
     
     <script>
+
+        if (inputPwd!=inputPwd2){
+            
+        }
             $(document).ready(function(){
                 $.ajax({ 
                     url: "LoginAPI.php",
@@ -88,7 +90,7 @@
                     }
 
                     success: function(data{
-                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+                        $('#texte').append('<p> Votre compte a été crée </p>')
             
                     })
                     error: function(xhr, status, error) {
