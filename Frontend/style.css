@@ -41,7 +41,14 @@ body {
   margin-top: 15px;
 }
 
-.bouton{
+#boutongauche{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#boutondroite{
   background: none;
   border: none;
   padding: 0;
@@ -59,13 +66,19 @@ body {
 .avis{
   display:flex;
   flex-direction: row;
+  justify-content: center;
   background-color: #0dcaf0;
 }
 
 .contenu{
 display : flex;
+flex-direction: column;
 background-color: #114d5f;
 height: auto;
+}
+
+#texte{
+  justify-content: center;
 }
 
 #milieu{

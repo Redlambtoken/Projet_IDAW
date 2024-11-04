@@ -5,41 +5,41 @@
                 <tr>
                 <label for="inputNom" class="col-sm-2 col-form-label">Nom*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputNom" >
+                    <input type="text" class="form-control" id="inputNom" required>
                 </div>
                 </tr>
                 <label for="inputPrenom" class="col-sm-2 col-form-label">Prénom*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputPrenom" >
+                    <input type="text" class="form-control" id="inputPrenom" required>
                 </div>
                 <label for="inputLogin" class="col-sm-2 col-form-label">Login*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputLogin" >
+                    <input type="text" class="form-control" id="inputLogin" required>
                 </div>
                 <br>
                 <label for="email" class="col-sm-2 col-form-label">Email*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputEmail" >
+                    <input type="text" class="form-control" id="inputEmail" required>
                 </div>
                 <br>
                 <label for="inputPwd" class="col-sm-2 col-form-label">Mot de passe*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputPsw" >
+                    <input type="text" class="form-control" id="inputPsw" required>
                 </div>
                 <br>
                 <label for="inputPwd2" class="col-sm-2 col-form-label">Vérification de mot de passe*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputPsw2" >
+                    <input type="text" class="form-control" id="inputPsw2" required>
                 </div>
                 <br>
                 <label for="inputDate" class="col-sm-2 col-form-label">Date de naissance*</label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" id="inputDate" >
+                    <input type="date" class="form-control" id="inputDate" required>
                 </div>
                 <br>
                 <br>
                 <label for="sexe">Sexe* : </label>
-                <select id="sexe" name="sexe">
+                <select id="sexe" name="sexe" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Femme</option>
                     <option value="2">Homme</option>
@@ -48,7 +48,7 @@
                 <br>
                 <br>
                 <label for="sport">Sport* : </label>
-                <select id="sport" name="sport">
+                <select id="sport" name="sport" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
@@ -65,28 +65,18 @@
         </form>
     </table>
     <br>
+    <div id="texte">
+
+    </div>
 
     
     <script>
             $(document).ready(function(){
-
-                const sexe : $("#inputSexe").val();
-                const sport : $("#inputSport").val();
-                const name : $("#inputNom").val();
-                const prenom : $("#inputPrenom").val();
-                const year : $("#inputDate").val();
-                const email : $("#inputEmail").val();
-                const password : $("#inputPwd2").val();
-
-                if (sexe === "Insérer valeur" || sport ="Insérer valeur"|| name === "" || prenom === ""|| year === ""|| email === ""|| password === "") {
-                    alert("Veuillez remplir tous les champs demandés");
-                    return;
-                }
-
                 $.ajax({ 
                     url: "LoginAPI.php",
                     method: "POST",
                     dataType : "json",
+                    contentType :"application/json"
                     data: {
                         sexe : $("#inputSexe").val(),
                         sport : $("#inputSport").val(),
@@ -98,7 +88,8 @@
                     }
 
                     success: function(data{
-                       $(\'#avis\').append() 
+                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+            
                     })
                     error: function(xhr, status, error) {
                         console.error("Erreur lors de la requête AJAX : " + error);

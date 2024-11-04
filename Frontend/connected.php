@@ -7,11 +7,11 @@
     <table>
         <tr>
             <th>Login* :</th>
-            <td><input type="text" name="Login" id="inputLogin"></td>
+            <td><input type="text" name="Login" id="inputLogin" required></td>
         </tr>
         <tr>
             <th>Mot de passe* :</th>
-            <td><input type="password" name="Password" id="inputPwd"></td>
+            <td><input type="password" name="Password" id="inputPwd" required></td>
         </tr>
         <tr>
             <th></th>
@@ -32,10 +32,6 @@
             const pwd = $("#inputPwd").val();
             console.log($("#inputPwd").val());
             
-            if (login === "" || pwd === "") {
-                alert("Veuillez remplir tous les champs demandés");
-                return;
-            }
             
             // Hachage du mot de passe avec MD5
             const pwdMD5 = CryptoJS.MD5(pwd).toString();
@@ -46,6 +42,7 @@
                 url: "LoginAPI.php",
                 method: "GET",
                 dataType: "json",
+                contentType :"application/json"
                 data: {
                     Login: login,
                     password: pwdMD5
