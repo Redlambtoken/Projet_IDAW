@@ -28,7 +28,7 @@
             method: 'GET', // Méthode GET pour récupérer des données
             dataType: 'json', // Type de données attendu
             
-            uccess: function(data) {
+            success: function(data) {
                 console.log(data);
                 // Vérifier s'il y a une erreur
                 if (data.error) {
@@ -39,7 +39,7 @@
                 let indice=0;
 
                 // Vider le conteneur avant d'afficher les nouvelles données
-                $('#avis').empty();
+                $('#texte').empty();
 
                 // Afficher la première donnée dans le conteneur
                 let opinion = afficherAvis(data, indice);
