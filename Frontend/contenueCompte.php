@@ -24,7 +24,7 @@
                 <option value="0">Insérer valeur</option>
                 <option value="1">des trois derniers jours</option>
                 <option value="2">de la semaine</option>
-                <option value="3">du mois</option>
+                <option value="3">de deux semaines</option>
             </select>
         </label>
         <div id="repas"></div>
@@ -84,13 +84,31 @@ function changeMonth(direction) {
 }
 
 $(document).ready(function(){
+    const currentDate= new Date();
+    let int=0;
+    if ($('#NbrJour').val()===0){
+        int =0;
+    }
+    if($('#NbrJour').val()===1){
+        int=2;
+    }
+    if($('#NbrJour').val()===2){
+        int=6;
+    }
+    if($('#NbrJour').val()===3){
+        int =13;
+    }
+    currentDate.setDate(currentDate.getDate() - int);
+    const data = {
+        date: currentDate.toISOString()
+    };
+    const date =JSON.stringify(currentDate);
     $.ajax({ 
-        url: "CalendeatAPI.php",
+        url: "../backend/CalendeatAPI.php",
         method: "GET",
         dataType: "json",
-        data{
-            
-        }
+        contentType: 'application/json',
+        data: JSON.stringify(data),
             
         success: function(data) {
             if (data.error) {
@@ -100,10 +118,6 @@ $(document).ready(function(){
             console.log(data);
 
             $('#repas').empty();
-
-            while(data!=empty){
-                $('#repas').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
-            }
         }
     })
 });

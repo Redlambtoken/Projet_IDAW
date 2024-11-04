@@ -39,7 +39,7 @@
                 <br>
                 <br>
                 <label for="sexe">Sexe* : </label>
-                <select id="sexe" name="sexe" required>
+                <select id="inputSexe" name="sexe" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Femme</option>
                     <option value="2">Homme</option>
@@ -48,7 +48,7 @@
                 <br>
                 <br>
                 <label for="sport">Sport* : </label>
-                <select id="sport" name="sport" required>
+                <select id="inputSport" name="sport" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
@@ -84,7 +84,7 @@
                         const pwdMD5 = CryptoJS.MD5(pwd).toString();
 
                         $.ajax({ 
-                            url: "LoginAPI.php",
+                            url: "../backend/LoginAPI.php",
                             method: "POST",
                             dataType : "json",
                             data: JSON.stringify({
@@ -107,8 +107,8 @@
                             error: function(xhr, status, error) {
                                 console.error("Erreur lors de la requête AJAX : " + error);
                             }
-                        }
-                    })
+                        })
+                    }
                     
                 }) 
             });
