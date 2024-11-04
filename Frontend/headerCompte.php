@@ -35,19 +35,17 @@
 
 <script>
     $(document).ready(function(){
-        $('#deconnection').submit(function(event){
+        $('#deconnection').click(function(event){
+            event.preventDefault(); 
             $.ajax({
                 url: "../backend/loginAPI.php",
                 method: "GET",
-                dataType:"json",
-                data : JSON.stringify({
-                    dec:dec
-                })
-                /*success: function(response){
+                success: function(response){
+                    alert("oui");
                     if(response === 200){
                         window.location.href='pageAccueil.php'
                     }
-                }*/
+                }
             })
         })
     })
