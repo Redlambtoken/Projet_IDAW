@@ -20,37 +20,38 @@ function getRecette($db){
 function createRecette($db,$json){
     $data = json_decode($json);value: 
     if((isset($data->nameR)) && $_SESSION["user_login"] != null && (isset($data->IDas)) && (isset($data->Qtes))){
-        $sql = "INSERT INTO `recette`(`NOM_RECETTE`) VALUES (:nameR)";
+        $sql = "INSERT INTO `nourriture_perso`(`LABEL_ALIMENT_PERSO`,`ID_UTILISATEUR`) VALUES (:nameR,:IDUtilisateur)";
         $exe = $db->prepare($sql);
         $exe->bindParam(':nameR', $data->nameR, PDO::PARAM_STR);
+        $exe->bindParam(':IDUtilisateur', $_SESSION["user_id"], PDO::PARAM_INT);
         $exe->execute();
-        $sql = "SELECT `ID_RECETTE` FROM `recette` WHERE 1";
+        $sql = "SELECT `ID_ALIMENT_PERSO` FROM `nourriture_perso` WHERE 1";
         $exe = $db->prepare($sql);
         $exe->execute();
-        $ID_Recette = $exe->fetch(PDO::FETCH_OBJ);
+        $ID_Recette = $exe->fetch(PDO::FETCH_OBJ); //à revoir ! -------------------
         if(isset($data->cat)){
-            $sqlUpate = "UPDATE `recette` SET `ID_CAT`=:IDCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_CAT`=:IDCat WHERE ID_RECETTE = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDCat', $data->cat, PDO::PARAM_INT);
             $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         if(isset($data->scat)){
-            $sqlUpate = "UPDATE `recette` SET `ID_SCAT`=:IDSCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SCAT`=:IDSCat WHERE ID_RECETTE = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDSCat', $data->scat, PDO::PARAM_INT);
             $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         if(isset($data->sscat)){
-            $sqlUpate = "UPDATE `recette` SET `ID_SSCAT`=:IDSSCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SSCAT`=:IDSSCat WHERE ID_RECETTE = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDSSCat', $data->sscat, PDO::PARAM_INT);
             $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         foreach($data->IDas as $index => $IDa){
-            $sql = "INSERT INTO `fait_de`(`ID_RECETTE`, `ID_ALIMENT`, `QUANTITE`) VALUES (:ID_R,:ID_A,:QTE)";
+            $sql = "INSERT INTO `contient`(`ID_REPAS`, `ID_ALIMENT`, `NUMBER`) VALUES (:ID_R,:ID_A,:QTE)";
             $exe = $db->prepare($sql);
             $exe->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
             $exe->bindParam(':ID_A', $IDa, PDO::PARAM_INT);
