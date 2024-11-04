@@ -31,8 +31,3 @@ function registerUser($db, $json){ //rajouter quelque chose pour que le mot de p
     return 400; //Il manque une information
 }
 
-function setHeaders() {
-    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
-    header("Access-Control-Allow-Origin: *");
-    header('Content-type: application/json; charset=utf-8');
-    }

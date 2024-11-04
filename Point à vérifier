@@ -7,7 +7,7 @@ Ce qui n'est plus à jour
 Je propose de fusioner les deux talbes pour avoir :
 TITLE -> ID recette, ID nutriment, Quantite (la table ferait)
 
-cuisson n'est plus nécessaire parce que c'est and les nourriture
+cuisson n'est plus nécessaire parce que c'est and les nourritures
 
 
 Repas associé à une recette (on n'en a pas)
@@ -21,5 +21,3 @@ nourriture associé avec plusieurs nutriments
 Table à changer 
 UPDATE contient pour avoir ID_nourriture à la place de ID_recette
 UPDATE la fusion des deux tables en haut
-
-Voir avec Nathan Crincket pour la bdd de ce qu'on a besoin quotidiennement
