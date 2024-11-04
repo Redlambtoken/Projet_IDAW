@@ -43,13 +43,14 @@
 
             // Envoi de la requête AJAX
             $.ajax({ 
-                url: "LoginAPI.php",
-                method: "GET",
+                url: "../backend/LoginAPI.php",
+                method: "POST",
                 dataType: "json",
-                data: {
-                    Login: login,
+                contentType : "application/json",
+                data: JSON.stringify({
+                    login: login,
                     password: pwdMD5
-                },
+                }),
                 success: function(response) {
                     if (response.status === 200) {
                         window.location.href = '/pageCompte.php';
