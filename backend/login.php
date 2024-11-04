@@ -49,11 +49,6 @@ function loginUser($db, $json){
         }
         return 400; //400 Mauvaise saisie de login/password
     }
-    else if(isset($data->Dec)){
-        session_unset();
-        session_destroy();
-        return 200;
-    }
     return 400; //pas de login et/ou de password
 }
 
@@ -70,4 +65,10 @@ function modifyPassworUser($db, $json){
         return 200;
     }
     return 400;
+}
+
+function Disconnect(){
+    session_unset();
+    session_destroy();
+    return 200;
 }
