@@ -69,6 +69,20 @@
     
     <script>
             $(document).ready(function(){
+
+                const sexe : $("#inputSexe").val();
+                const sport : $("#inputSport").val();
+                const name : $("#inputNom").val();
+                const prenom : $("#inputPrenom").val();
+                const year : $("#inputDate").val();
+                const email : $("#inputEmail").val();
+                const password : $("#inputPwd2").val();
+
+                if (sexe === "Insérer valeur" || sport ="Insérer valeur"|| name === "" || prenom === ""|| year === ""|| email === ""|| password === "") {
+                    alert("Veuillez remplir tous les champs demandés");
+                    return;
+                }
+
                 $.ajax({ 
                     url: "LoginAPI.php",
                     method: "POST",
@@ -82,7 +96,7 @@
                         email : $("#inputEmail").val(),
                         password : $("#inputPwd2").val()
                     }
-                    
+
                     success: function(data{
                        $(\'#avis\').append() 
                     })

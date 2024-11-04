@@ -1,10 +1,112 @@
 <div class="container">
-    <div class="calendrier">
-        
-
+<div class="calendar-container">
+    <div class="calendar-header">
+        <button onclick="changeMonth(-1)">&#9664;</button>
+        <h2 id="month-year"></h2>
+        <button onclick="changeMonth(1)">&#9654;</button>
     </div>
-    <div class="afficher repas">
+    <div class="calendar">
+        <div class="days-of-week">
+            <div>Dim</div>
+            <div>Lun</div>
+            <div>Mar</div>
+            <div>Mer</div>
+            <div>Jeu</div>
+            <div>Ven</div>
+            <div>Sam</div>
+        </div>
+        <div id="calendar-days" class="calendar-days"></div>
+    </div>
+</div>
+    <div>
+        <label for="Jour">Afficher les repas : </label>
+        <select id="NbrJour" name="jour">
+            <option value="0">Insérer valeur</option>
+            <option value="1">des trois derniers jours</option>
+            <option value="2">de la semaine</option>
+            <option value="3">du mois</option>
+        </select>
+        <div id="repas">
+
+        </div>
 
     </div>
 
 </div>
+
+<script>
+    let currentDate = new Date();
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderCalendar();
+});
+
+function renderCalendar() {
+    const monthYear = document.getElementById('month-year');
+    const calendarDays = document.getElementById('calendar-days');
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Affiche le mois et l'année dans l'en-tête
+    const options = { month: 'long', year: 'numeric' };
+    monthYear.textContent = currentDate.toLocaleDateString('fr-FR', options);
+
+    // Obtenir le premier jour et le nombre de jours dans le mois
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Efface le calendrier
+    calendarDays.innerHTML = '';
+
+    // Remplit les cases vides au début du mois
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement('div');
+        calendarDays.appendChild(emptyCell);
+    }
+
+    // Crée les jours du mois
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement('div');
+        dayCell.textContent = day;
+
+        // Marquer la date actuelle
+        if (day === new Date().getDate() &&
+            month === new Date().getMonth() &&
+            year === new Date().getFullYear()) {
+            dayCell.classList.add('today');
+        }
+
+        calendarDays.appendChild(dayCell);
+    }
+}
+
+function changeMonth(direction) {
+    currentDate.setMonth(currentDate.getMonth() + direction);
+    renderCalendar();
+}
+
+$(document).ready(function(){
+    $('#login_form').submit(function(event){
+        $.ajax({ 
+            url: "CalendeatAPI.php",
+            method: "GET",
+            dataType: "json",
+            
+            success: function(data) {
+                if (data.error) {
+                    alert("Erreur : " + data.error);
+                    return;
+                }
+
+                $('#repas').empty();
+
+                while(data!=empty){
+                    $('#repas').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+                }
+        
+            })
+    })
+})
+
+</script>
