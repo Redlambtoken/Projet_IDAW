@@ -20,7 +20,7 @@
                         <li class="sidebar-nav-item"><a href="pageAccueil.php">Accueil</a></li>
                         <li class="sidebar-nav-item"><a href="pageConnection.php">Connection</a></li>
                         <li class="sidebar-nav-item"><a href="pageAccueil.php#milieu">A propos de nous</a></li>
-                        <li class="sidebar-nav-item"><a href="$pageActuel#bas">Nous Contacter</a></li>
+                        <li class="sidebar-nav-item"><a href="pageAccueil.php#bas">Nous Contacter</a></li>
                         <li class="sidebar-nav-item"><a href="pageCreation.php">Créer mon Compte</a></li>
                     </ul>
                 </nav> 

@@ -4,9 +4,7 @@ body {
 }
 
 .header{
-  display: inline-flex;
-  padding: 0;
-  margin: 0;
+  display:flex;
   height: 100px;
   background-color: brown;
 }
@@ -16,13 +14,14 @@ body {
 }
 
 .citation{
-  display: inline-flex;
+  display: flex;
   height: auto;
   background-color: blue;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-size:xx-large;
   color: rgb(244, 4, 4);
+  margin-bottom: 15px;
 }
 
 .row{
@@ -39,14 +38,36 @@ body {
   background-color: green;
   text-align: center;
   flex-direction: column;
+  margin-top: 15px;
 }
 
-#avis{
+#boutongauche{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#boutondroite{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.bouton img{
+  transition: transform 0.2s;
+}
+
+.image-bouton:hover img {
+  transform: scale(1.05);
+}
+
+.avis{
   display:flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
   background-color: #0dcaf0;
-  align-content: center;
-  flex-direction: column;
 }
 
 .contenu{
@@ -54,6 +75,10 @@ display : flex;
 flex-direction: column;
 background-color: #114d5f;
 height: auto;
+}
+
+#texte{
+  justify-content: center;
 }
 
 #milieu{
@@ -75,4 +100,69 @@ h3{
   color: grey;
   font-size: small;
   font-style: italic;
+}
+
+.calendar-container {
+  width: 350px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f8955;
+  color: white;
+  padding: 15px;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.days-of-week, .calendar-days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.days-of-week div, .calendar-days div {
+  width: calc(100% / 7);
+  text-align: center;
+  padding: 10px;
+}
+
+.days-of-week div {
+  font-weight: bold;
+  color: #0073e6;
+}
+
+.calendar-days div {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.calendar-days div:hover {
+  background-color: #e0e0e0;
+}
+
+.calendar-days .today {
+  background-color: #63d0b1;
+  color: white;
+  border-radius: 50%;
 }
