@@ -1,8 +1,5 @@
 <?php 
 
-//attention il faut mettre dans une autre table afin de séparer les recette perso et les recette qu'on veut
-//il faudra mettre une colonne avec l'ID de l'utilisateur qui le créé pour le fetch
-
 function getRecette($db){
     //rajouter les conditions sur des aliments
     if($_SESSION["user_login"] != null){
@@ -28,32 +25,32 @@ function createRecette($db,$json){
         $sql = "SELECT `ID_ALIMENT_PERSO` FROM `nourriture_perso` WHERE 1";
         $exe = $db->prepare($sql);
         $exe->execute();
-        $ID_Recette = $exe->fetch(PDO::FETCH_OBJ); //à revoir ! -------------------
+        $ID_ALIMENT_PERSO = $exe->fetch(PDO::FETCH_OBJ);
         if(isset($data->cat)){
-            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_CAT`=:IDCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_CAT`=:IDCat WHERE ID_ALIMENT_PERSO = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDCat', $data->cat, PDO::PARAM_INT);
-            $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
+            $exeUpdate->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         if(isset($data->scat)){
-            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SCAT`=:IDSCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SCAT`=:IDSCat WHERE ID_ALIMENT_PERSO = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDSCat', $data->scat, PDO::PARAM_INT);
-            $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
+            $exeUpdate->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         if(isset($data->sscat)){
-            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SSCAT`=:IDSSCat WHERE ID_RECETTE = :ID_R";
+            $sqlUpate = "UPDATE `nourriture_perso` SET `ID_SSCAT`=:IDSSCat WHERE ID_ALIMENT_PERSO = :ID_R";
             $exeUpdate = $db->prepare($sqlUpate);
             $exeUpdate->bindParam(':IDSSCat', $data->sscat, PDO::PARAM_INT);
-            $exeUpdate->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
+            $exeUpdate->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
             $exeUpdate->execute();
         }
         foreach($data->IDas as $index => $IDa){
-            $sql = "INSERT INTO `contient`(`ID_REPAS`, `ID_ALIMENT`, `NUMBER`) VALUES (:ID_R,:ID_A,:QTE)";
+            $sql = "INSERT INTO `fait_de_perso`(`ID_NUTRIMENT`, `ID_ALIMENT_PERSO`, `QUANTITE`) VALUES (:ID_A,:ID_R,:QTE)";
             $exe = $db->prepare($sql);
-            $exe->bindParam(':ID_R', $ID_Recette->ID_RECETTE, PDO::PARAM_STR);
+            $exe->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
             $exe->bindParam(':ID_A', $IDa, PDO::PARAM_INT);
             $exe->bindParam(':QTE', $data->Qtes[$index], PDO::PARAM_INT);
             $exe->execute();
