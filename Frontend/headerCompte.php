@@ -22,7 +22,7 @@
                         <li class="sidebar-nav-item"><a href="creationRecette.php">Créer une recette</a></li>
                         <li class="sidebar-nav-item"><a href="creationRepas.php">Ajouter un repas</a></li>
                         <li class="sidebar-nav-item"><a href="$pageActuel#bas">Nous Contacter</a></li>
-                        <li class="sidebar-nav-item"><a href="pageAccueil.php">Déconnection</a></li>
+                        <li class="sidebar-nav-item" id="deconnection"><a href="pageAccueil.php">Déconnection</a></li>
                     </ul>
                 </nav>
             <div>
@@ -32,3 +32,23 @@
         <div class="citation row">
              Cuisiner c'est donner une saveur à l'amour
         </div>
+
+<script>
+    $(document).ready(function(){
+        $('#deconnection').submit(function(event){
+            $.ajax({
+                url: "../backend/loginAPI.php",
+                method: "GET",
+                dataType:"json",
+                data : JSON.stringify({
+                    dec:dec
+                })
+                /*success: function(response){
+                    if(response === 200){
+                        window.location.href='pageAccueil.php'
+                    }
+                }*/
+            })
+        })
+    })
+</script>

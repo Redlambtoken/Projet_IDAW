@@ -24,12 +24,12 @@
                 <br>
                 <label for="inputPwd" class="col-sm-2 col-form-label">Mot de passe*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputPsw" required>
+                    <input type="password" class="form-control" id="inputPwd" required>
                 </div>
                 <br>
                 <label for="inputPwd2" class="col-sm-2 col-form-label">Vérification de mot de passe*</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="inputPsw2" required>
+                    <input type="password" class="form-control" id="inputPwd2" required>
                 </div>
                 <br>
                 <label for="inputDate" class="col-sm-2 col-form-label">Date de naissance*</label>
@@ -70,43 +70,46 @@
     
     <script>
 
-        if (inputPwd!=inputPwd2){
-            
-        }
+        
             $(document).ready(function(){
-                $.ajax({ 
-                    url: "LoginAPI.php",
-                    method: "POST",
-                    dataType : "json",
-                    contentType :"application/json"
-                    data: {
-                        sexe : $("#inputSexe").val(),
-                        sport : $("#inputSport").val(),
-                        name : $("#inputNom").val(),
-                        prenom : $("#inputPrenom").val(),
-                        year : $("#inputDate").val(),
-                        email : $("#inputEmail").val(),
-                        password : $("#inputPwd2").val()
-                    }
+                $('#login_form').submit(function(event){
+                    event.preventDefault();
 
-                    success: function(data{
-                        $('#texte').append('<p> Votre compte a été crée </p>')
-            
+                    if ($("#inputPwd").val()!=$("#inputPwd2").val()){
+                        $('#texte').append('<p>Les deux mots de passes ne sont pas les mêmes</p>')
+                    }
+                    else{
+                        // Hachage du mot de passe avec MD5
+                        const pwd = $("#inputPwd2").val();
+                        const pwdMD5 = CryptoJS.MD5(pwd).toString();
+
+                        $.ajax({ 
+                            url: "LoginAPI.php",
+                            method: "POST",
+                            dataType : "json",
+                            data: JSON.stringify({
+                                sexe : $("#inputSexe").val(),
+                                sport : $("#inputSport").val(),
+                                name : $("#inputNom").val(),
+                                prenom : $("#inputPrenom").val(),
+                                year : $("#inputDate").val(),
+                                email : $("#inputEmail").val(),
+                                password : pwdMD5
+                            }),
+
+                            success: function(response) {
+                                if (response=== 201) {
+                                    $('#texte').append('<p> Le compte a été crée </p>')
+                                } else if (response === 401) {
+                                    $('#texte').append('<p>Cet email est associé à un compte existant</p>')
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Erreur lors de la requête AJAX : " + error);
+                            }
+                        }
                     })
-                    error: function(xhr, status, error) {
-                        console.error("Erreur lors de la requête AJAX : " + error);
-                    }
-                })
-
-                //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                .done(function(response){
-                    let data = JSON.stringify(response);
-                    $("div#res").append(data);
-                })
-
-                //Ce code sera exécuté en cas d\'échec - L\'erreur est passée à fail()
-                .fail(function(error){
-                    alert("La requête s\'est terminée en échec. Infos : " + JSON.stringify(error));
-                })
+                    
+                }) 
             });
         </script>

@@ -102,6 +102,24 @@ h3{
   font-style: italic;
 }
 
+.container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.presentationRepas{
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content:flex-start;
+}
+
+#NbrJour{
+  height: 10%;
+}
+
 .calendar-container {
   width: 350px;
   background: #ffffff;

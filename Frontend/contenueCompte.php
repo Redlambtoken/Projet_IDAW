@@ -1,37 +1,34 @@
 <div class="container">
-<div class="calendar-container">
-    <div class="calendar-header">
-        <button onclick="changeMonth(-1)">&#9664;</button>
-        <h2 id="month-year"></h2>
-        <button onclick="changeMonth(1)">&#9654;</button>
-    </div>
-    <div class="calendar">
-        <div class="days-of-week">
-            <div>Dim</div>
-            <div>Lun</div>
-            <div>Mar</div>
-            <div>Mer</div>
-            <div>Jeu</div>
-            <div>Ven</div>
-            <div>Sam</div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button onclick="changeMonth(-1)">&#9664;</butto>
+            <h2 id="month-year"></h2>
+            <button onclick="changeMonth(1)">&#9654;</button>
         </div>
-        <div id="calendar-days" class="calendar-days"></div>
-    </div>
-</div>
-    <div>
-        <label for="Jour">Afficher les repas : </label>
-        <select id="NbrJour" name="jour">
-            <option value="0">Insérer valeur</option>
-            <option value="1">des trois derniers jours</option>
-            <option value="2">de la semaine</option>
-            <option value="3">du mois</option>
-        </select>
-        <div id="repas">
-
+        <div class="calendar">
+            <div class="days-of-week">
+                <div>Dim</div>
+                <div>Lun</div>
+                <div>Mar</div>
+                <div>Mer</div>
+                <div>Jeu</div>
+                <div>Ven</div>
+                <div>Sam</div>
+            </div>
+            <div id="calendar-days" class="calendar-days"></div>
         </div>
-
     </div>
-
+    <div class="presentationRepas">
+        <label for="Jour">Afficher les repas : 
+            <select id="NbrJour" name="jour">
+                <option value="0">Insérer valeur</option>
+                <option value="1">des trois derniers jours</option>
+                <option value="2">de la semaine</option>
+                <option value="3">du mois</option>
+            </select>
+        </label>
+        <div id="repas"></div>
+    </div>
 </div>
 
 <script>
@@ -87,26 +84,28 @@ function changeMonth(direction) {
 }
 
 $(document).ready(function(){
-    $('#login_form').submit(function(event){
-        $.ajax({ 
-            url: "CalendeatAPI.php",
-            method: "GET",
-            dataType: "json",
+    $.ajax({ 
+        url: "CalendeatAPI.php",
+        method: "GET",
+        dataType: "json",
+        data{
             
-            success: function(data) {
-                if (data.error) {
-                    alert("Erreur : " + data.error);
-                    return;
-                }
+        }
+            
+        success: function(data) {
+            if (data.error) {
+            alert("Erreur : " + data.error);
+                return;
+            }
+            console.log(data);
 
-                $('#repas').empty();
+            $('#repas').empty();
 
-                while(data!=empty){
-                    $('#repas').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
-                }
-        
-            })
+            while(data!=empty){
+                $('#repas').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+            }
+        }
     })
-})
+});
 
 </script>

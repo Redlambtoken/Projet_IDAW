@@ -35,7 +35,7 @@
                     alert("Erreur : " + data.error);
                     return;
                 }
-
+                console.log(data.length);
                 let indice=0;
 
                 // Vider le conteneur avant d'afficher les nouvelles données
@@ -48,17 +48,31 @@
                 $('#texte').append('<p>' + opinion[0] + '</p> <br><p>'+opinion[1]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
             
                 $("#boutondroite").on("click", function() {
-                    indice=indice+1;
-                    $('#texte').empty();
-                    let opinion = afficherAvis(data,indice);
-                    $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    if(indice!=data.length-1){
+                        indice=indice+1;
+                        $('#texte').empty();
+                        let opinion = afficherAvis(data,indice);
+                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    }
+                    else{
+                        $('#texte').empty();
+                        let opinion = afficherAvis(data,indice);
+                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    }
                 });
 
                 $("#boutongauche").on("click", function() {
-                    indice=indice-1
-                    $('#texte').empty();
-                    let opinion = afficherAvis(data,indice);
-                    $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    if(indice!=0){
+                        indice=indice-1
+                        $('#texte').empty();
+                        let opinion = afficherAvis(data,indice);
+                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    }
+                    else{
+                        $('#texte').empty();
+                        let opinion = afficherAvis(data,indice);
+                        $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    }
                 });
 
             },   
