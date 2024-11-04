@@ -48,9 +48,10 @@
                     password: pwdMD5
                 }),
                 success: function(response) {
-                    if (response.status === 200) {
-                        window.location.href = '/pageCompte.php';
-                    } else if (response.status === 400) {
+                    alert(response);
+                    if (response === 200) {
+                        window.location.href = 'pageCompte.php';
+                    } else if (response === 400) {
                         alert("Login ou mot de passe incorrect");
                     }
                 },

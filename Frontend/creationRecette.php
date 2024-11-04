@@ -13,3 +13,23 @@
         <option value="3">Autre</option>
     </select>
 </form>
+<script>
+    $(document).ready(function(){
+            // Envoi de la requête AJAX
+            $.ajax({ 
+                url: "../backend/recettesAPI.php",
+                method: "GET",
+                success: function(response) {
+                    alert(response);
+                    if (response === 200) {
+                        window.location.href = 'pageCompte.php';
+                    } else if (response === 400) {
+                        alert("Login ou mot de passe incorrect");
+                    }
+                },
+                error: function() {
+                    alert("Une erreur est survenue lors de la connexion. Veuillez réessayer.");
+                }
+            });
+        });
+</script>

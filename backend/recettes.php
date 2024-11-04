@@ -2,10 +2,11 @@
 
 //attention il faut mettre dans une autre table afin de séparer les recette perso et les recette qu'on veut
 //il faudra mettre une colonne avec l'ID de l'utilisateur qui le créé pour le fetch
+
 function getRecette($db){
     //rajouter les conditions sur des aliments
     if($_SESSION["user_login"] != null){
-        $sql_check = "SELECT `NOM_RECETTE`, `ID_CAT`, `ID_SCAT`, `ID_SSCAT`  FROM `recette` WHERE ID_UTILISATEUR = ".$_SESSION["user_id"]."";
+        $sql_check = "SELECT `LABEL_ALIMENT_PERSO` FROM `nourriture_perso` WHERE ID_UTILISATEUR = ".$_SESSION["user_id"]."";
         $exe_check = $db->prepare($sql_check);
         $exe_check->execute();
         $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);

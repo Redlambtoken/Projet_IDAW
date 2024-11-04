@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 //end point du login qui demande un get avec un json en param avec un hash md5
 require_once("init_pdo.php");
 
@@ -18,17 +18,17 @@ function loginUser($db, $json){
         $exe_check->execute();
         $res_check = $exe_check->fetchAll(PDO::FETCH_OBJ);
         if($res_check == null){
-            $sql_check = "INSERT INTO `utilisateur`(`ID_SEXE`, `ID_SPORT`, `NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `ANNEE_DE_NAISSANCE`, `EMAIL`, `PASSWORD`) VALUES (:sexe,:sport,:name,:prenom,:year,:email,:password)";
-            $exe_check = $db->prepare($sql_check);
-            $exe_check->bindParam(':sexe', $data->sexe, PDO::PARAM_INT);
-            $exe_check->bindParam(':sport', $data->sport, PDO::PARAM_INT);
-            $exe_check->bindParam(':name', $data->name, PDO::PARAM_STR);
-            $exe_check->bindParam(':prenom', $data->prenom, PDO::PARAM_STR);
-            $exe_check->bindParam(':year', $data->year, PDO::PARAM_STR);
-            $exe_check->bindParam(':email', $data->email, PDO::PARAM_STR);
-            $exe_check->bindParam(':password', $data->password, PDO::PARAM_STR);
-            $exe_check->execute();
-            $res_check = $exe_check->fetchAll(PDO::FETCH_OBJ);
+            $sql = "INSERT INTO `utilisateur`(`ID_SEXE`, `ID_SPORT`, `NOM_UTILISATEUR`, `PRENOM_UTILISATEUR`, `ANNEE_DE_NAISSANCE`, `EMAIL`, `PASSWORD`) VALUES (:sexe,:sport,:name,:prenom,:year,:email,:password)";
+            $exe = $db->prepare($sql);
+            $exe->bindParam(':sexe', $data->sexe, PDO::PARAM_INT);
+            $exe->bindParam(':sport', $data->sport, PDO::PARAM_INT);
+            $exe->bindParam(':name', $data->name, PDO::PARAM_STR);
+            $exe->bindParam(':prenom', $data->prenom, PDO::PARAM_STR);
+            $exe->bindParam(':year', $data->year, PDO::PARAM_STR);
+            $exe->bindParam(':email', $data->email, PDO::PARAM_STR);
+            $exe->bindParam(':password', $data->password, PDO::PARAM_STR);
+            $exe->execute();
+            $res_check = $exe->fetchAll(PDO::FETCH_OBJ);
             return 201; //OK l'utilisateur est créé
             //rajouter un try and catch avec try le return 200 et catch un return 500 en disant qu'on peut pas faire la requête SQL
         }
@@ -44,10 +44,15 @@ function loginUser($db, $json){
         if($res_check != null){
             $_SESSION["user_login"] = $data->login;
             $_SESSION["user_name"] = $res_check->NOM_UTILISATEUR;
-            $_SESSION["user_id"] != $res_check->ID_UTILISATEUR;
+            $_SESSION["user_id"] = $res_check->ID_UTILISATEUR;
             return 200; //OK l'utilisateur existe bel et bien
         }
-        return 404; //404 Mauvaise saisie de login/password
+        return 400; //400 Mauvaise saisie de login/password
+    }
+    else if(isset($data->Dec)){
+        session_unset();
+        session_destroy();
+        return 200;
     }
     return 400; //pas de login et/ou de password
 }
