@@ -31,14 +31,26 @@
     </div>
 </div>
 <br>
-<div class="ajoutAvis">
+<div>
     Donner mon avis sur le site
-    <div>
-        <textarea id="textInput" rows="4" cols="50" placeholder="Écrivez ici..."></textarea>
-        <button id="posterAvis">Soumettre</button>
-        <div id="remarques"></div>
+    <form id="ratingForm" class="form-container">
+    <div class="zoneText">
+        <textarea id="Text" name="comment" placeholder="Laissez un commentaire..."></textarea>
+        <button type="submit">Envoyer</button>
     </div>
+    <div class="rating-container">
+        <div class="rating">
+            <span class="star" data-value="5">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="1">★</span>
+        </div>
+        <span id="rating-value"></span>
+    </div>
+</form>
 </div>
+<div id="remarques"></div>
 
 <script>
     let currentDate = new Date();
@@ -179,25 +191,72 @@ function afficherRepas(data) {
     return [date, contenu]; 
     
 }
+
 //poster un avis
-$('#posterAvis').on('click', function(){
-    console.log("OUI");
-    $.ajax({
-        url:"../backend/avisAPI",
-        method: "POST",
-        data :JSON.stringify({
-            Text:$('#textInput').val()
-        }),
+$(document).ready(function(){
+    $('#ratingForm').submit(function(event){
+        const ratingValue = document.getElementById("rating-value");
+        consol.log($('#data-value').val());
+        consol.log(ratingValue);
+        $.ajax({
+            url:"../backend/avisAPI",
+            method: "POST",
+            data :JSON.stringify({
+                Text:$('#text').val(),
+                Note:$('#data-value').val()
+            }),
         
-        success : function(response){
-            console.log("YEP");
-            $('#remarques').append('<p>Merci pour votre avis</p>')
-        },
-        error: function(xhr, status, error) {
+            success : function(response){
+                console.log("YEP");
+                $('#remarques').append('<p>Merci pour votre avis</p>')
+            },
+            error: function(xhr, status, error) {
             
-            $('#remarques').append('<p>Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
-        },
-    })
+                $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
+            },
+        })
+    }) 
 })
 
+document.addEventListener("DOMContentLoaded", function() {
+    const stars = document.querySelectorAll(".star");
+    const ratingValue = document.getElementById("rating-value");
+    
+    stars.forEach(star => {
+        star.addEventListener("click", function() {
+            const selectedRating = this.getAttribute("data-value");
+            ratingValue.textContent = selectedRating;
+
+            // Met à jour l'affichage des étoiles
+            stars.forEach(s => s.classList.remove("selected"));
+            this.classList.add("selected");
+            let prevSibling = this.previousElementSibling;
+            while (prevSibling) {
+                prevSibling.classList.add("selected");
+                prevSibling = prevSibling.previousElementSibling;
+            }
+        });
+    });
+});
+
+//avis et étoile
+const stars = document.querySelectorAll('.star');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            selectedRating = star.getAttribute('data-value');
+            updateStars(selectedRating);
+        });
+    });
+
+    function updateStars(rating) {
+        stars.forEach(star => {
+            if (star.getAttribute('data-value') <= rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
 </script>
