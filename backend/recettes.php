@@ -1,6 +1,6 @@
 <?php 
 
-function getRecette($db,$json){
+function getRecette($db,$json){ //Puis-je recevoir une méthode get sans body ?
     $data = json_decode($json);
     if($_SESSION["user_login"] != null){
         $sql_check = "SELECT `LABEL_ALIMENT_PERSO` FROM `nourriture_perso` WHERE ID_UTILISATEUR = ".$_SESSION["user_id"]."";

@@ -12,7 +12,7 @@ function setHeaders() {
 
 switch($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        $result = getAvis($pdo);
+        $result = getCitation($pdo);
         if($result != 404){
             http_response_code(response_code: 200);
         }
@@ -21,13 +21,4 @@ switch($_SERVER["REQUEST_METHOD"]) {
         }
         setHeaders();
         exit(json_encode($result));
-    case 'POST':
-        $result = createAvis($pdo, json: file_get_contents('php://input'));
-        if($result != 400){
-            http_response_code(response_code: 200);
-        }
-        else {
-            http_response_code(response_code: $result);
-        }
-        exit(json_encode(value: $result));
     }
