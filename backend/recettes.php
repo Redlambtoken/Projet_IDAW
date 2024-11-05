@@ -1,10 +1,88 @@
 <?php 
 
-function getRecette($db){
-    //rajouter les conditions sur des aliments
+function getRecette($db,$json){
+    $data = json_decode($json);
     if($_SESSION["user_login"] != null){
         $sql_check = "SELECT `LABEL_ALIMENT_PERSO` FROM `nourriture_perso` WHERE ID_UTILISATEUR = ".$_SESSION["user_id"]."";
         $exe_check = $db->prepare($sql_check);
+        $exe_check->execute();
+        $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+        if($res_check != null){
+            return $res_check;
+        }
+    }
+    if(isset($data->ID_CAT) && isset($data->ID_SCAT) && isset($data->ID_SSCAT)){
+        if(isset($data->name)){
+            $name = $data->name . "%";
+            $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC AND LABEL_ALIMENT like :nameA";
+            $exe_check = $db->prepare($sql_check);
+            $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':nameA', $name, PDO::PARAM_STR);
+            $exe_check->execute();
+            $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+            if($res_check != null){
+                return $res_check; //OK l'utilisateur existe bel et bien
+            }
+        }
+        $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC";
+        $exe_check = $db->prepare($sql_check);
+        $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
+        $exe_check->execute();
+        $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+        if($res_check != null){
+            return $res_check; //OK l'utilisateur existe bel et bien
+        }
+    }
+    else if(isset($data->ID_CAT) && isset($data->ID_SCAT)){
+        if(isset($data->name)){
+            $name = $data->name . "%";
+            $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC AND LABEL_ALIMENT like :nameA";
+            $exe_check = $db->prepare($sql_check);
+            $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':nameA', $name, PDO::PARAM_STR);
+            $exe_check->execute();
+            $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+            if($res_check != null){
+                return $res_check; //OK l'utilisateur existe bel et bien
+            }
+        }
+        $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC";
+        $exe_check = $db->prepare($sql_check);
+        $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
+        $exe_check->execute();
+        $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+        if($res_check != null){
+            return $res_check; //OK l'utilisateur existe bel et bien
+        }
+    }
+    else if(isset($data->ID_CAT)){
+        if(isset($data->name)){
+            $name = $data->name . "%";
+            $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC AND LABEL_ALIMENT like :nameA";
+            $exe_check = $db->prepare($sql_check);
+            $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
+            $exe_check->bindParam(':nameA', $name, PDO::PARAM_STR);
+            $exe_check->execute();
+            $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
+            if($res_check != null){
+                return $res_check; //OK l'utilisateur existe bel et bien
+            }
+        }
+        $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` WHERE ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC";
+        $exe_check = $db->prepare($sql_check);
+        $exe_check->bindParam(':IDC', $data->ID_CAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSC', $data->ID_SCAT, PDO::PARAM_INT);
+        $exe_check->bindParam(':IDSSC', $data->ID_SSCAT, PDO::PARAM_INT);
         $exe_check->execute();
         $res_check = $exe_check->fetchALL(PDO::FETCH_OBJ);
         if($res_check != null){
