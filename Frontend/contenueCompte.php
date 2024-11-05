@@ -1,7 +1,7 @@
 <div class="container">
     <div class="calendar-container">
         <div class="calendar-header">
-            <button onclick="changeMonth(-1)">&#9664;</butto>
+            <button onclick="changeMonth(-1)">&#9664;</button>
             <h2 id="month-year"></h2>
             <button onclick="changeMonth(1)">&#9654;</button>
         </div>
@@ -22,12 +22,21 @@
         <label for="Jour">Afficher les repas : 
             <select id="NbrJour" name="jour">
                 <option value="0">Insérer valeur</option>
-                <option value="1">des trois derniers jours</option>
-                <option value="2">de la semaine</option>
-                <option value="3">de deux semaines</option>
+                <option value="2">des trois derniers jours</option>
+                <option value="6">de la semaine</option>
+                <option value="13">de deux semaines</option>
             </select>
         </label>
         <div id="repas"></div>
+    </div>
+</div>
+<br>
+<div class="ajoutAvis">
+    Donner mon avis sur le site
+    <div>
+        <textarea id="textInput" rows="4" cols="50" placeholder="Écrivez ici..."></textarea>
+        <button id="posterAvis">Soumettre</button>
+        <div id="remarques"></div>
     </div>
 </div>
 
@@ -83,34 +92,18 @@ function changeMonth(direction) {
     renderCalendar();
 }
 
+// afficher les repas du jour
 $(document).ready(function(){
-    const currentDate= new Date();
-    let int=0;
-    if ($('#NbrJour').val()===0){
-        int =0;
-    }
-    if($('#NbrJour').val()===1){
-        int=2;
-    }
-    if($('#NbrJour').val()===2){
-        int=6;
-    }
-    if($('#NbrJour').val()===3){
-        int =13;
-    }
-    currentDate.setDate(currentDate.getDate() - int);
-    const data = {
-        date: currentDate.toISOString()
-    };
-    const date =JSON.stringify(currentDate);
+    let int =0;
     $.ajax({ 
-        url: "../backend/CalendeatAPI.php",
+        url: "../backend/calendeatAPI.php",
         method: "GET",
         dataType: "json",
         contentType: 'application/json',
-        data: JSON.stringify(data),
+        data: {int : int},
             
         success: function(data) {
+            console.log("oui");
             if (data.error) {
             alert("Erreur : " + data.error);
                 return;
@@ -118,8 +111,93 @@ $(document).ready(function(){
             console.log(data);
 
             $('#repas').empty();
+
+            if (data && Object.keys(data).length === 0) {
+                alert("Aucun résultat trouvé.");
+            } else {
+            
+                data.forEach(function(item){
+                    $('#repas').append('<div>'+item.nom+'</div>')
+                })
+            
+            /*data.forEach(function(item) {
+                let result=afficherRepas(item);
+                $('#repas').append('<div>' + result[0]+ '</div>'+'<div>'+ result[1]+'</div>');
+            });*/
+            }
         }
     })
+})
+
+//afficher les repas en fonction de la valeur du menu déroulant
+$(document).ready(function(){
+    console.log("hello");
+    $(document).on('change', '#NbrJour', function() {
+        let int = $(this).val();
+        console.log("hy");
+
+        $.ajax({ 
+            url: "../backend/calendeatAPI.php",
+            method: "GET",
+            dataType: "json",
+            data: {value: int},
+            
+            success: function(data) {
+                if (data.error) {
+                alert("Erreur : " + data.error);
+                    return;
+                }
+                console.log("oui");
+                console.log(data);
+
+                $('#repas').empty();
+
+                if (data && Object.keys(data).length === 0) {
+                    alert("Aucun résultat trouvé.");
+                } else {
+            
+                data.forEach(function(item){
+                    $('#repas').append('<div>'+item.nom+'</div>')
+                })
+            
+            /*data.forEach(function(item) {
+                let result=afficherRepas(item);
+                $('#repas').append('<div>' + result[0]+ '</div>'+'<div>'+ result[1]+'</div>');
+            });*/
+                }
+            }
+        })
+    })
 });
+
+function afficherRepas(data) {
+    let cle1 = Object.keys(item)[0];
+    let date = avisPage[cle1];
+    let cle2 = Object.keys(item)[1];
+    let contenu = avisPage[cle2];
+        
+    return [date, contenu]; 
+    
+}
+//poster un avis
+$('#posterAvis').on('click', function(){
+    console.log("OUI");
+    $.ajax({
+        url:"../backend/avisAPI",
+        method: "POST",
+        data :JSON.stringify({
+            Text:$('#textInput').val()
+        }),
+        
+        success : function(response){
+            console.log("YEP");
+            $('#remarques').append('<p>Merci pour votre avis</p>')
+        },
+        error: function(xhr, status, error) {
+            
+            $('#remarques').append('<p>Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
+        },
+    })
+})
 
 </script>

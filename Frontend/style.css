@@ -116,8 +116,15 @@ h3{
   justify-content:flex-start;
 }
 
+.ajouterAvis{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 #NbrJour{
-  height: 10%;
+  height: auto;
 }
 
 .calendar-container {
@@ -130,6 +137,8 @@ h3{
 
 .calendar-header {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   background-color: #3f8955;
