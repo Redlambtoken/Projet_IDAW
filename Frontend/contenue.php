@@ -1,3 +1,4 @@
+<div class="content">
 <div class="contenu">
     <div class="avis">
         <div>
@@ -20,7 +21,7 @@
         A propos de nous
     </div> 
 </div>
-
+</div>
 <script>
     $(document).ready(function(){
         $.ajax({

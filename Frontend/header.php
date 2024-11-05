@@ -25,7 +25,7 @@
                     </ul>
                 </nav> 
             <div>
-                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="90%" width="10%">     
+                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="auto" width="7%" style="min-width : 90px">     
             </div>
         </div>
         <div class="citation row">

@@ -1,19 +1,18 @@
-html {
+html, body {
   height: 100%;
-  width: 100%;
-  position: relative;
+}
+
+body {
+  margin: 0, serif !important;
+  padding: 0, serif !important;
   display: flex;
   flex-direction: column;
 }
 
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 
 .header{
+  margin: 0 !important;
+  padding: 0 !important;
   display:flex;
   height: 100px;
   background-color: brown;
@@ -40,6 +39,8 @@ body {
 }
 
 .row{
+  margin: 0 !important;
+  padding: 0 !important;
   flex-direction: row;
 }
 
@@ -47,15 +48,13 @@ body {
   flex-direction: row-reverse;
 }
 
-.footer{
+.footerPerso{
   display:flex;
   flex-wrap: wrap;
   background-color: green;
   text-align: center;
   flex-direction: column;
-  flex-grow:1;
-  position: relative;
-  top: 100%;
+  
 }
 
 #boutongauche{
