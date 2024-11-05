@@ -14,7 +14,7 @@ require_once("recettes.php");
  // ==============
  switch($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
-        $result = getRecette($pdo,$json); //il y aura beaucoup de conditio sur le get donc un peu long
+        $result = getRecette($pdo,json: file_get_contents('php://input')); //il y aura beaucoup de conditio sur le get donc un peu long
         setHeaders();
         exit(json_encode(value: $result));
     case 'POST': //Jeton JWT à rajouter pour savoir lesquelles ajouter sur le compte
