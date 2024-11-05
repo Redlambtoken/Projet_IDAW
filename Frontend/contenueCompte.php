@@ -1,7 +1,7 @@
 <div class="container">
     <div class="calendar-container">
         <div class="calendar-header">
-            <button onclick="changeMonth(-1)">&#9664;</butto>
+            <button onclick="changeMonth(-1)">&#9664;</button>
             <h2 id="month-year"></h2>
             <button onclick="changeMonth(1)">&#9654;</button>
         </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="presentationRepas">
         <label for="Jour">Afficher les repas : 
-            <select id="NbrJour" name="jour">
+            <select style="height : 100%" id="NbrJour" name="jour">
                 <option value="0">Insérer valeur</option>
                 <option value="1">des trois derniers jours</option>
                 <option value="2">de la semaine</option>
