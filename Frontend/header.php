@@ -59,7 +59,7 @@
                 $('#citation').empty();
 
                 // Afficher la première donnée dans le conteneur
-                $('#citation').append('<p>' + data[numéroCitation]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+                $('#citation').append('<p>' + data[numéroCitation].CITATION_TEXT+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
 
             },   
             error: function(jqXHR, textStatus, errorThrown) {
