@@ -75,7 +75,6 @@
                 url: "../backend/loginAPI.php",
                 method: "GET",
                 success: function(response){
-                    alert("oui");
                     if(response === 200){
                         window.location.href='pageAccueil.php'
                     }

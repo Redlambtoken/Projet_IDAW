@@ -244,6 +244,7 @@ Créer un nouveaux repas
 
 <script>
     $(document).ready(function(){
+        let ID =[];
         console.log("OUI");
         let int=0;
         $('#formRepas').submit(function(event){
@@ -252,13 +253,15 @@ Créer un nouveaux repas
             console.log($('#inputCat').val());
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) === 0 && Number($('#inputCat3').val()) === 0){
                 console.log("Une caté selectionnée");
+                console.log(Number($('#inputCat').val()));
+                ID.push($('#inputCat').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
                     data :JSON.stringify({
-                        IDC: Number($('#inputCat').val())
+                        IDC: ID
                     }),
 
                     success:function(data){
@@ -278,15 +281,16 @@ Créer un nouveaux repas
                 })
             }
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) !== 0){
+                ID.push($('#inputCat').val());
+                ID.push($('#inputCat2').val());
+                ID.push($('#inputCat3').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
                     data :JSON.stringify({
-                        IDC:Number($('#inputCat').val()),
-                        IDSC:Number($('#inputCat2').val()),
-                        IDSSC:Number($('#inputCat3').val())
+                        IDC: ID
                     }),
 
                     success:function(data){
@@ -305,14 +309,15 @@ Créer un nouveaux repas
                 })
             }
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) === 0){
+                ID.push($('#inputCat').val());
+                ID.push($('#inputCat2').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
                     data :JSON.strin({
-                        IDC:Number($('#inputCat').val()),
-                        IDSC:Number($('#inputCat2').val())
+                        IDC: ID
                     }),
 
                     success:function(data){

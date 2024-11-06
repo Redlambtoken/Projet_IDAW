@@ -118,31 +118,26 @@
                 console.log("Hello");
                 
                 $('#créationCompte').submit(function(event){
-                    console.log("oui");
-                    console.log($("#inputDate").val());
-                    console.log(($("#inputDate").val).substring(0, 4));
-                    const yearBirth = ($("#inputDate").val).substring(0, 4);
+                    event.preventDefault();
+                    const yearBirth = ($("#inputDate").val()).substring(0, 4);
                     const currentDate = new Date();
                     const year = currentDate.getFullYear();
-                    event.preventDefault();
                     if ($("#inputPwd").val()!=$("#inputPwd2").val()){
                         $('#texte').empty;
                         $('#texte').append('<p>Les deux mots de passes ne sont pas les mêmes</p>')
                     }
                     if (containsSpecialCharacter($("#inputEmail").val())===false) {
                         $("#verifEmail").append('<p>Veuillez mettre une adresse correcte</p>');
-                    } else {
-                        console.log("La chaîne ne contient pas de caractère spécial.");
                     }
-                    if(yearBirth > year -200 || yearBirth > year - 15 || $("#inputDate").val()>currentDate){
+                    if(yearBirth < year -200 || yearBirth > year - 15 || $("#inputDate").val()>currentDate){
                         $('#texte').empty;
                         $('#texte').append('<p>Veulliez rentrer une date de naissance valide</p>');
                     }
-                    if($("#inputSexe").val()===0){
+                    if(Number($("#inputSexe").val())===0){
                         $('#texte').empty;
                         $('#texte').append('<p>Veulliez selectioner un valeur pour le champ "Sexe"</p>');
                     }
-                    if($("#inputSport").val()===0){
+                    if(Number($("#inputSport").val())===0){
                         $('#texte').empty;
                         $('#texte').append('<p>Veulliez selectioner un valeur pour le champ "Sport"</p>');
                     }
@@ -150,7 +145,7 @@
                         // Hachage du mot de passe avec MD5
                         const pwd = $("#inputPwd2").val();
                         const pwdMD5 = CryptoJS.MD5(pwd).toString();
-                        const year= ($("#inputDate").val).substring(0, 4);
+                        const year= ($("#inputDate").val()).substring(0, 4);
 
                         $.ajax({ 
                             url: "../backend/LoginAPI.php",
