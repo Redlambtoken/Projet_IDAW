@@ -28,11 +28,46 @@
                 <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="90%" width="10%">
             </div>      
         </div>
-        <div class="citation row">
+        <div id="citation" class="row">
              Cuisiner c'est donner une saveur à l'amour
         </div>
 
 <script>
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    $(document).ready(function(){
+        $.ajax({
+            url: '../backend/CitationAPI.php', // URL du script PHP
+            method: 'GET', // Méthode GET pour récupérer des données
+            dataType: 'json', // Type de données attendu
+            
+            success: function(data) {
+                console.log(data);
+                // Vérifier s'il y a une erreur
+                if (data.error) {
+                    alert("Erreur : " + data.error);
+                    return;
+                }
+                let numéroCitation = getRandomIntInclusive(0, data.length-1);
+
+                // Vider le conteneur avant d'afficher les nouvelles données
+                $('#citation').empty();
+
+                // Afficher la première donnée dans le conteneur
+                $('#citation').append('<p>' + data[numéroCitation]+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+
+            },   
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#citation').append('<p>Citation</p>');
+            }
+        });
+    });
+
     $(document).ready(function(){
         $('#deconnection').click(function(event){
             event.preventDefault(); 

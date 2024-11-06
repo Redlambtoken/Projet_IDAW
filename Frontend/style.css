@@ -27,7 +27,7 @@ body {
   flex-grow: 1;
 }
 
-.citation{
+#citation{
   display: flex;
   height: auto;
   background-color: blue;
@@ -48,7 +48,74 @@ body {
   flex-direction: row-reverse;
 }
 
-.footerPerso{
+.form-container {
+  display: flex;
+  flex-direction: column; /* Par défaut, alignement vertical */
+  width: auto;
+  background: white; /* Couleur de fond du formulaire */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  padding: 20px; /* Espace intérieur */
+}
+@media (min-width: 600px) {
+  .form-container {
+      flex-direction: row; /* Alignement horizontal sur grands écrans */
+      align-items: flex-start; /* Alignement des éléments en haut */
+      justify-content: space-around;
+  }
+  .rating-container {
+      margin-right: 20px; /* Espace entre les étoiles et le champ de texte */
+      display: flex;
+      align-items: center; /* Centrer les étoiles verticalement */
+  }
+  textarea {
+      flex: 0; /* Prendre tout l'espace restant */
+  }
+}
+.rating {
+  direction: rtl; /* Permet le clic de gauche à droite */
+  unicode-bidi: bidi-override; /* Assure que l'ordre des clics est correct */
+  font-size: 2rem; /* Taille des étoiles */
+  cursor: pointer; /* Pointeur au survol */
+}
+.star {
+  color: #ddd; /* Couleur des étoiles non sélectionnées */
+  margin-left: 5px; /* Espace entre les étoiles */
+}
+.star.selected,
+.star:hover,
+.star:hover ~ .star {
+  color: gold; /* Couleur des étoiles sélectionnées */
+}
+.zoneText{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+textarea {
+  width: 100%; /* Prend toute la largeur disponible */
+  padding: 10px; /* Espace intérieur */
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 5px; /* Coins arrondis */
+  margin-top: 10px; /* Espace au-dessus de la zone de texte */
+}
+button {
+  margin-top: 20px; /* Espace entre le champ de commentaire et le bouton */
+  width: 20%;
+  padding: 10px 15px; /* Espace intérieur du bouton */
+  border: none; /* Supprime la bordure par défaut */
+  background-color: #007BFF; /* Couleur de fond bleue */
+  color: white; /* Couleur du texte */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Pointeur au survol */
+  transition: background-color 0.3s; /* Transition douce pour le changement de couleur */
+}
+button:hover {
+  background-color: #0056b3; /* Couleur de fond au survol */
+}
+
+
+.footer{
   display:flex;
   flex-wrap: wrap;
   background-color: green;
@@ -133,7 +200,7 @@ h3{
 }
 
 #NbrJour{
-  height: 10%;
+  height: auto;
 }
 
 .calendar-container {
@@ -146,6 +213,8 @@ h3{
 
 .calendar-header {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   background-color: #3f8955;
