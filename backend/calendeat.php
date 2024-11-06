@@ -21,6 +21,7 @@ function getEat($db){
         $res = $exe->fetchAll(PDO::FETCH_OBJ);
         return $res;
     }
+    //
 return 400;
 }
 
