@@ -19,8 +19,8 @@
                     <ul class="sidebar-nav"> 
                         <li class="sidebar-brand"><a href="$pageActuel.php#haut"> </a></li>
                         <li class="sidebar-nav-item"><a href="pageCompte.php">Accueil</a></li>
-                        <li class="sidebar-nav-item"><a href="creationRecette.php">Créer une recette</a></li>
-                        <li class="sidebar-nav-item"><a href="creationRepas.php">Ajouter un repas</a></li>
+                        <li class="sidebar-nav-item"><a href="pageRecette.php">Créer une recette</a></li>
+                        <li class="sidebar-nav-item"><a href="pageRepas.php">Ajouter un repas</a></li>
                         <li class="sidebar-nav-item"><a href="$pageActuel#bas">Nous Contacter</a></li>
                         <li class="sidebar-nav-item" id="deconnection"><a href="pageAccueil.php">Déconnection</a></li>
                     </ul>

@@ -1,6 +1,7 @@
 Créer un nouveaux repas
-<div>
+<form id="formRepas" action="">
     Recherche recette
+<div>
     <label for="Catégorie">Catégorie n°1 : </label>
     <select id="inputCat" name="catégorie">
         <option value="0">Insérer valeur</option>
@@ -16,6 +17,7 @@ Créer un nouveaux repas
         <option value="10">aides culinaires et ingredients divers</option>
         <option value="11">aliments infantiles</option>
     </select>
+    <br>
     <label for="SCatégorie">Catégorie n°2 : </label>
     <select id="inputCat2" name="scatégorie">
         <option value="0">Insérer valeur</option>
@@ -83,6 +85,7 @@ Créer un nouveaux repas
         <option value="3">plats composes</option>
         <option value="4">pizzas, tartes et crepes salees</option>
     </select>
+    <br>
     <label for="SSCatégorie">Catégorie n°3 : </label>
     <select id="inputCat3" name="sscatégorie">
         <option value="0">Insérer une valeur</option>
@@ -164,6 +167,7 @@ Créer un nouveaux repas
         <option value="76">Herbes fraîches</option>
         <option value="77">Herbes séchées</option>
     </select>
+    <br>
     Je veux limiter :
     <select id="inputNut1" name="nutriment">
         <option value="0">Insérer une valeur</option>
@@ -229,26 +233,31 @@ Créer un nouveaux repas
     </select>
     <label for="chiffre"> < </label>
     <input type="number" id="chiffre" name="chiffre">
-    <div >
-        <button id="bouton" type="submit" class="">Rechercher</button>
-    </div>
+    <br>
 </div>
+<button id="bouton" type="submit">Rechercher</button>   
+</form>
 <div id="repas"></div>
 <div id="panier"></div>
 
 <script>
     $(document).ready(function(){
+        console.log("OUI");
         let int=0;
         $('#bouton').submit(function(event){
+            event.preventDefault();
+            console.log("bouton cliquer");
             if($('#inputCat').val()!=0 && $('#inputCat2').val()!=0 && $('#inputCat3').val()!=0){
                 $.ajax({
                     url:"../backend/recetteAPI.php",
-                    method: "POST",
+                    method: "GET",
+                    dataType: "json",
+                    contentType:"application/json",
                     data :JSON.stringify({
                         IDC:$('#inputCat').val(),
                         IDSC:$('#inputCat2').val(),
                         IDSSC:$('#inputCat3').val()
-                    })
+                    }),
 
                     success:function(data){
                         $('#repas').empty;
@@ -258,16 +267,18 @@ Créer un nouveaux repas
                             int++;
                             $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
                         })
-                    }
+                    },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
                     },
                 })
             }
-            if($('#inputCat').val()!=0 && $('#inputCat2').val()!=0 && IDSSC:$('#inputCat3').val()===0){
+            if($('#inputCat').val()!=0 && $('#inputCat2').val()!=0 && $('#inputCat3').val()===0){
                 $.ajax({
                     url:"../backend/recetteAPI.php",
-                    method: "POST",
+                    method: "GET",
+                    dataType: "json",
+                    contentType:"application/json",
                     data :JSON.stringify({
                         IDC:$('#inputCat').val(),
                         IDSC:$('#inputCat2').val(),
@@ -281,7 +292,7 @@ Créer un nouveaux repas
                             int++;
                             $('#repas').append('<button id=repas'+int+' onclick="repasPanier()" nom="'+nom+'">'+nom+'</button>')
                         })
-                    }
+                    },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
                     },
@@ -291,7 +302,7 @@ Créer un nouveaux repas
         })
     })
 function repasPanier(){
-    
+
 }
     
 
