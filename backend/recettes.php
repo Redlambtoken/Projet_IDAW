@@ -214,7 +214,7 @@ function createRecette($db,$json){
         $exe->bindParam(':nameR', $data->nameR, PDO::PARAM_STR);
         $exe->bindParam(':IDUtilisateur', $_SESSION["user_id"], PDO::PARAM_INT);
         $exe->execute();
-        $sql = "SELECT `ID_ALIMENT_PERSO` FROM `nourriture_perso` WHERE 1";
+        $sql = "SELECT `ID_ALIMENT_PERSO` FROM `nourriture_perso` WHERE 1 ORDER BY ID_ALIMENT_PERSO DESC";
         $exe = $db->prepare($sql);
         $exe->execute();
         $ID_ALIMENT_PERSO = $exe->fetch(PDO::FETCH_OBJ);
@@ -240,12 +240,20 @@ function createRecette($db,$json){
             $exeUpdate->execute();
         }
         foreach($data->IDas as $index => $IDa){
-            $sql = "INSERT INTO `fait_de_perso`(`ID_NUTRIMENT`, `ID_ALIMENT_PERSO`, `QUANTITE`) VALUES (:ID_A,:ID_R,:QTE)";
-            $exe = $db->prepare($sql);
-            $exe->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
-            $exe->bindParam(':ID_A', $IDa, PDO::PARAM_INT);
-            $exe->bindParam(':QTE', $data->Qtes[$index], PDO::PARAM_INT);
-            $exe->execute();
+            $string = $IDa . "%";
+            $sql_check = "SELECT ID_NUTRIMENT FROM `nutriment` WHERE LABEL_NUTRIMENT like :label ORDER BY ID_NUTRIMENT ASC LIMIT 1";
+            $exe_check = $db->prepare($sql_check);
+            $exe_check->bindParam(':label', $string, PDO::PARAM_STR);
+            $exe_check->execute();
+            $res = $exe_check->fetch(PDO::FETCH_OBJ);
+            if ($res != null){
+                $sql = "INSERT INTO `fait_de_perso`(`ID_NUTRIMENT`, `ID_ALIMENT_PERSO`, `QUANTITE`) VALUES (:ID_A,:ID_R,:QTE)";
+                $exe = $db->prepare($sql);
+                $exe->bindParam(':ID_R', $ID_ALIMENT_PERSO->ID_ALIMENT_PERSO, PDO::PARAM_STR);
+                $exe->bindParam(':ID_A', $res->ID_NUTRIMENT, PDO::PARAM_INT);
+                $exe->bindParam(':QTE', $data->Qtes[$index], PDO::PARAM_INT);
+                $exe->execute();
+            }
         }
         return 201;
     }
