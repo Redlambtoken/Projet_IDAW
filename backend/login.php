@@ -36,7 +36,7 @@ function loginUser($db, $json){
         return 409; //code conflict donc pas possible de le créer car l'email est déjà utilisé
     }
     else if(isset($data->login) && (isset($data->password))){
-        $sql_check = "SELECT NOM_UTILISATEUR, ID_UTILISATEUR, PASSWORD FROM `utilisateur` WHERE LOGIN_UTILISATEUR = :login AND PASSWORD = :password"; //à adapter si besoin
+        $sql_check = "SELECT NOM_UTILISATEUR, ID_UTILISATEUR, ID_SEXE, ANNEE_DE_NAISSANCE, ID_SPORT, PASSWORD FROM `utilisateur` WHERE LOGIN_UTILISATEUR = :login AND PASSWORD = :password"; //à adapter si besoin
         $exe_check = $db->prepare($sql_check);
         $exe_check->bindParam(':login', $data->login, PDO::PARAM_STR);
         $exe_check->bindParam(':password', $data->password, PDO::PARAM_STR);
@@ -46,6 +46,16 @@ function loginUser($db, $json){
             $_SESSION["user_login"] = $data->login;
             $_SESSION["user_name"] = $res_check->NOM_UTILISATEUR;
             $_SESSION["user_id"] = $res_check->ID_UTILISATEUR;
+            $_SESSION["user_sexe"] = $res_check->ID_SEXE;
+            $_SESSION["user_sport"] = $res_check->ID_SPORT;
+            $anneeActuelle = date("Y");
+            $age = $anneeActuelle - $res_check->ANNEE_DE_NAISSANCE;
+            $sql = "SELECT ID_AGE FROM `tranche_age` WHERE AGE_MIN <= :age AND AGE_MAX >= :age"; //à adapter si besoin
+            $exe = $db->prepare($sql);
+            $exe->bindParam(':age', $age, PDO::PARAM_INT);
+            $exe->execute();
+            $res = $exe->fetch(PDO::FETCH_OBJ);
+            $_SESSION["user_age"] = $res->ID_AGE;
             return 200; //OK l'utilisateur existe bel et bien
         }
         return 400; //400 Mauvaise saisie de login/password
