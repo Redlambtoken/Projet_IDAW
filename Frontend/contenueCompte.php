@@ -106,13 +106,11 @@ function changeMonth(direction) {
 
 // afficher les repas du jour
 $(document).ready(function(){
-    let int =0;
     $.ajax({ 
         url: "../backend/calendeatAPI.php",
         method: "GET",
         dataType: "json",
         contentType: 'application/json',
-        data: {int : int},
             
         success: function(data) {
             console.log("oui");
@@ -129,7 +127,7 @@ $(document).ready(function(){
             } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.nom+'</div>')
+                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -147,12 +145,12 @@ $(document).ready(function(){
     $(document).on('change', '#NbrJour', function() {
         let int = $(this).val();
         console.log("hy");
-
+        if(int !=0){
         $.ajax({ 
             url: "../backend/calendeatAPI.php",
             method: "GET",
             dataType: "json",
-            data: {value: int},
+            data: {day: int},
             
             success: function(data) {
                 if (data.error) {
@@ -169,7 +167,7 @@ $(document).ready(function(){
                 } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.nom+'</div>')
+                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -179,6 +177,39 @@ $(document).ready(function(){
                 }
             }
         })
+        }
+        else{
+            $.ajax({ 
+            url: "../backend/calendeatAPI.php",
+            method: "GET",
+            dataType: "json",
+            
+            success: function(data) {
+                if (data.error) {
+                alert("Erreur : " + data.error);
+                    return;
+                }
+                console.log("oui");
+                console.log(data);
+
+                $('#repas').empty();
+
+                if (data && Object.keys(data).length === 0) {
+                    alert("Aucun résultat trouvé.");
+                } else {
+            
+                data.forEach(function(item){
+                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
+                })
+            
+            /*data.forEach(function(item) {
+                let result=afficherRepas(item);
+                $('#repas').append('<div>' + result[0]+ '</div>'+'<div>'+ result[1]+'</div>');
+            });*/
+                }
+            }
+        })
+        }
     })
 });
 
@@ -195,23 +226,25 @@ function afficherRepas(data) {
 //poster un avis
 $(document).ready(function(){
     $('#ratingForm').submit(function(event){
-        const ratingValue = document.getElementById("rating-value");
-        consol.log($('#data-value').val());
-        consol.log(ratingValue);
+        event.preventDefault();
+        let rating = document.getElementById('rating-value').innerHTML;
         $.ajax({
             url:"../backend/avisAPI",
             method: "POST",
+            dataType : "json",
+            contentType: "application/json",
             data :JSON.stringify({
-                Text:$('#text').val(),
-                Note:$('#data-value').val()
+                Text: $('#Text').val(),
+                Note: rating
             }),
         
             success : function(response){
+                alert("qyuosf");
                 console.log("YEP");
                 $('#remarques').append('<p>Merci pour votre avis</p>')
             },
             error: function(xhr, status, error) {
-            
+                alert("NOPE");
                 $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
             },
         })
