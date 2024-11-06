@@ -1,4 +1,5 @@
 Créer un nouveaux repas
+<table>
 <form id="formRepas" action="">
     Recherche recette
 <div>
@@ -237,6 +238,7 @@ Créer un nouveaux repas
 </div>
 <button id="bouton" type="submit">Rechercher</button>   
 </form>
+</table>
 <div id="repas"></div>
 <div id="panier"></div>
 
@@ -244,22 +246,24 @@ Créer un nouveaux repas
     $(document).ready(function(){
         console.log("OUI");
         let int=0;
-        $('#bouton').submit(function(event){
+        $('#formRepas').submit(function(event){
             event.preventDefault();
             console.log("bouton cliquer");
-            if($('#inputCat').val()!=0 && $('#inputCat2').val()!=0 && $('#inputCat3').val()!=0){
+            console.log($('#inputCat').val());
+            if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) === 0 && Number($('#inputCat3').val()) === 0){
+                console.log("Une caté selectionnée");
                 $.ajax({
-                    url:"../backend/recetteAPI.php",
+                    url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
                     data :JSON.stringify({
-                        IDC:$('#inputCat').val(),
-                        IDSC:$('#inputCat2').val(),
-                        IDSSC:$('#inputCat3').val()
+                        IDC: Number($('#inputCat').val())
                     }),
 
                     success:function(data){
+                        console.log("la requête est valide");
+                        console.log(data);
                         $('#repas').empty;
 
                         data.forEach(function(item){
@@ -273,22 +277,50 @@ Créer un nouveaux repas
                     },
                 })
             }
-            if($('#inputCat').val()!=0 && $('#inputCat2').val()!=0 && $('#inputCat3').val()===0){
+            if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) !== 0){
                 $.ajax({
-                    url:"../backend/recetteAPI.php",
+                    url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
                     data :JSON.stringify({
-                        IDC:$('#inputCat').val(),
-                        IDSC:$('#inputCat2').val(),
+                        IDC:Number($('#inputCat').val()),
+                        IDSC:Number($('#inputCat2').val()),
+                        IDSSC:Number($('#inputCat3').val())
                     }),
 
                     success:function(data){
+                        console.log(data);
                         $('#repas').empty;
 
                         data.forEach(function(item){
                             let nom=JSON.parse
+                            int++;
+                            $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
+                    },
+                })
+            }
+            if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) === 0){
+                $.ajax({
+                    url:"../backend/recettesAPI.php",
+                    method: "GET",
+                    dataType: "json",
+                    contentType:"application/json",
+                    data :JSON.strin({
+                        IDC:Number($('#inputCat').val()),
+                        IDSC:Number($('#inputCat2').val())
+                    }),
+
+                    success:function(data){
+                        console.log(data);
+                        $('#repas').empty;
+
+                        data.forEach(function(item){
+                            nomRepas(item);
                             int++;
                             $('#repas').append('<button id=repas'+int+' onclick="repasPanier()" nom="'+nom+'">'+nom+'</button>')
                         })
@@ -301,6 +333,11 @@ Créer un nouveaux repas
 
         })
     })
+
+function nomRepas(data){
+    const nom = JSON.parse(data);
+}
+
 function repasPanier(){
 
 }
