@@ -244,7 +244,6 @@ Créer un nouveaux repas
 
 <script>
     $(document).ready(function(){
-        let ID =[];
         console.log("OUI");
         let int=0;
         $('#formRepas').submit(function(event){
@@ -254,15 +253,14 @@ Créer un nouveaux repas
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) === 0 && Number($('#inputCat3').val()) === 0){
                 console.log("Une caté selectionnée");
                 console.log(Number($('#inputCat').val()));
-                ID.push($('#inputCat').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
-                    data :JSON.stringify({
-                        IDC: ID
-                    }),
+                    data :{
+                        ID_CAT: $('#inputCat').val()
+                    },
 
                     success:function(data){
                         console.log("la requête est valide");
@@ -281,17 +279,16 @@ Créer un nouveaux repas
                 })
             }
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) !== 0){
-                ID.push($('#inputCat').val());
-                ID.push($('#inputCat2').val());
-                ID.push($('#inputCat3').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
-                    data :JSON.stringify({
-                        IDC: ID
-                    }),
+                    data :{
+                        ID_CAT: $('#inputCat').val(),
+                        ID_SCAT: $('#inputCat2').val(),
+                        ID_SSCAT: $('#inputCat3').val()
+                    },
 
                     success:function(data){
                         console.log(data);
@@ -309,16 +306,15 @@ Créer un nouveaux repas
                 })
             }
             if(Number($('#inputCat').val())!==0 && Number($('#inputCat2').val()) !== 0 && Number($('#inputCat3').val()) === 0){
-                ID.push($('#inputCat').val());
-                ID.push($('#inputCat2').val());
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
                     dataType: "json",
                     contentType:"application/json",
-                    data :JSON.strin({
-                        IDC: ID
-                    }),
+                    data :{
+                        ID_CAT: $('#inputCat').val(),
+                        ID_SCAT: $('#inputCat2').val()
+                    },
 
                     success:function(data){
                         console.log(data);

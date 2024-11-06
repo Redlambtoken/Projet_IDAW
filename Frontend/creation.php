@@ -164,7 +164,7 @@
 
                             success: function(response) {
                                 if (response=== 201) {
-                                    $('#texte').append('<p> Le compte a été crée </p>')
+                                    window.location.href='pageCompteCree.php';
                                 } else if (response === 409) {
                                     $('#texte').append('<p>Cet email est associé à un compte existant</p>')
                                 }
