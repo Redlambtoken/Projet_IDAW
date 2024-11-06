@@ -22,7 +22,6 @@ function createAvis($db, $json){
         $exe_check->bindParam(':NOTE', $data->Note, PDO::PARAM_INT);
         $exe_check->bindParam(':VERIF', $verif, PDO::PARAM_INT);
         $exe_check->execute();
-        $res_check = $exe_check->fetch(PDO::FETCH_OBJ);
         return 201; //L'avis est bien créé
     }
     return 400; //404 Mauvaise saisie de paramètres

@@ -10,8 +10,8 @@
         <script src="scripts.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
         <link rel="stylesheet" href="menuDeroulant.css">
-
     <body>
+        
         <div id ="haut" class="header row">
             <a class="menu-toggle rounded" ><i class="fas fa-bars"></i></a>
                 <nav id="sidebar-wrapper">
@@ -25,7 +25,7 @@
                     </ul>
                 </nav> 
             <div>
-                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="90%" width="10%">     
+                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="auto" width="7%" style="min-width : 90px">     
             </div>
         </div>
         <div id="citation" class="row">
