@@ -49,7 +49,7 @@ Créer un nouveaux repas
         <option value="39">Céréales de petit-déjeuner</option>
         <option value="38">Biscuits sucrés</option>
         <option value="37">Viennoiseries</option>
-        <option value="36">Confitures et assimilés</optio>
+        <option value="36">Confitures et assimilés</option>
         <option value="35">Confiseries non chocolatées</option>
         <option value="34">Chocolats et produits à base de chocolat</option>
         <option value="33">Sucres, miels et assimilés</option>
@@ -79,7 +79,7 @@ Créer un nouveaux repas
         <option value="9">Légumineuses</option>
         <option value="8">Pommes de terre et autres tubercules</option>
         <option value="7">Légumes</option>
-        <option value="6">Feuilletés et autres entrées</optio>
+        <option value="6">Feuilletés et autres entrées</option>
         <option value="5">Sandwichs</option>
         <option value="1">salades composees et crudites</option>
         <option value="2">soupes</option>
