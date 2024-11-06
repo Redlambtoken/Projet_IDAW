@@ -63,8 +63,7 @@
 
             },   
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                alert("Une erreur est survenue lors de la récupération des données.");
+            
             }
         });
     });
