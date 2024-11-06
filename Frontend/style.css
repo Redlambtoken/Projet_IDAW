@@ -29,6 +29,7 @@ body {
 
 #citation{
   display: flex;
+  text-align: center;
   height: auto;
   background-color: blue;
   justify-content: center;

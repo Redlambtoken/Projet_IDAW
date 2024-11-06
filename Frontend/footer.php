@@ -1,4 +1,4 @@
-    <footer id="bas" class="footerPerso">
+    <footer id="bas" class="footer">
         <h1>Nous Contacter</h1>
         <h2>Pour poser une question</h2>
         <h3>CalendEat.Questions@gmail.com</h3>
