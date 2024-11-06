@@ -20,7 +20,7 @@
     </div>
     <div class="presentationRepas">
         <label for="Jour">Afficher les repas : 
-            <select id="NbrJour" name="jour">
+            <select style="height : 100%" id="NbrJour" name="jour">
                 <option value="0">Insérer valeur</option>
                 <option value="2">des trois derniers jours</option>
                 <option value="6">de la semaine</option>

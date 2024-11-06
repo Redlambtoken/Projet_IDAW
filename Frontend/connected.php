@@ -3,6 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script -->
 
 <!-- Formulaire de connexion -->
+<div class="content">
 <form id="login_form" action="">
     <table>
         <tr>
@@ -21,7 +22,7 @@
 </form>
 
 <p style="color: red; font-style: italic;">* : champ obligatoire</p>
-
+</div>
 <script>
     $(document).ready(function(){
         $('#login_form').submit(function(event){

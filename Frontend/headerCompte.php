@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calend'Eat</title>
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="style.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <script src="scripts.js"></script>
@@ -13,7 +12,7 @@
         <link rel="stylesheet" href="menuDeroulant.css">
     <body>
 
-        <div id ="haut" class="header">
+        <div id ="haut" class="header row">
             <a class="menu-toggle rounded" ><i class="fas fa-bars"></i></a>
                 <nav id="sidebar-wrapper">
                     <ul class="sidebar-nav"> 
@@ -26,7 +25,7 @@
                     </ul>
                 </nav>
             <div>
-                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="100%" width="100%">
+                <img src="Logo_Calend_Eat.png" alt="ImageLogo" height ="90%" width="10%">
             </div>      
         </div>
         <div id="citation" class="row">
