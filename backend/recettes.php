@@ -13,7 +13,7 @@ function getRecette($db,$json){
     }
     if(isset($_GET["ID_CAT"]) && isset($_GET["ID_SCAT"]) && isset($_GET["ID_SSCAT"])){
         if(isset($_GET["name"])){
-            if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+            if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
                 $name = $_GET["name"] . "%";
                 $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC AND LABEL_ALIMENT like :nameA GROUP BY nourriture.ID_ALIMENT";
                 $exe_check = $db->prepare($sql_check);
@@ -42,7 +42,7 @@ function getRecette($db,$json){
                 return $res_check; //OK l'utilisateur existe bel et bien
             }
         }
-        else  if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+        else  if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
             $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC AND ID_SCAT = :IDSC AND ID_SSCAT = :IDSSC GROUP BY nourriture.ID_ALIMENT";
             $exe_check = $db->prepare($sql_check);
             $exe_check->bindParam(':IDC', $_GET["ID_CAT"], PDO::PARAM_INT);
@@ -69,7 +69,7 @@ function getRecette($db,$json){
     }
     else if(isset($_GET["ID_CAT"]) && isset($_GET["ID_SCAT"])){
         if(isset($_GET["name"])){
-            if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+            if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
                 $name = $_GET["name"] . "%";
                 $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC AND ID_SCAT = :IDSC AND LABEL_ALIMENT like :nameA GROUP BY nourriture.ID_ALIMENT";
                 $exe_check = $db->prepare($sql_check);
@@ -96,7 +96,7 @@ function getRecette($db,$json){
                 return $res_check; //OK l'utilisateur existe bel et bien
             }
         }
-        else  if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+        else  if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
             $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC AND ID_SCAT = :IDSC GROUP BY nourriture.ID_ALIMENT";
             $exe_check = $db->prepare($sql_check);
             $exe_check->bindParam(':IDC', $_GET["ID_CAT"], PDO::PARAM_INT);
@@ -121,7 +121,7 @@ function getRecette($db,$json){
     }
     else if(isset($_GET["ID_CAT"])){
         if(isset($_GET["name"])){
-            if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+            if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
                 $name = $_GET["name"] . "%";
                 $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC AND LABEL_ALIMENT like :nameA GROUP BY nourriture.ID_ALIMENT";
                 $exe_check = $db->prepare($sql_check);
@@ -146,7 +146,7 @@ function getRecette($db,$json){
                 return $res_check; //OK l'utilisateur existe bel et bien
             }
         }
-        else  if($_GET["ID_N"] && isset($_GET["MaxQTE"])){
+        else if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
             $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND ID_CAT = :IDC GROUP BY nourriture.ID_ALIMENT";
             $exe_check = $db->prepare($sql_check);
             $exe_check->bindParam(':IDC', $_GET["ID_CAT"], PDO::PARAM_INT);
@@ -169,7 +169,7 @@ function getRecette($db,$json){
     }
     else if(isset($_GET["name"])){
         $name = $_GET["name"] . "%";
-        if($_GET["ID_N"]  && isset($_GET["MaxQTE"])){
+        if(isset($_GET["ID_N"])  && isset($_GET["MaxQTE"])){
             $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N AND LABEL_ALIMENT like :nameA GROUP BY nourriture.ID_ALIMENT";
             $exe_check = $db->prepare($sql_check);
             $exe_check->bindParam(':nameA', $name, PDO::PARAM_STR);
@@ -190,7 +190,7 @@ function getRecette($db,$json){
             return $res_check; //OK l'utilisateur existe bel et bien
         }
     }
-    else if($_GET["ID_N"]  && isset($_GET["MaxQTE"])){
+    else if(isset($_GET["ID_N"]) && isset($_GET["MaxQTE"])){
         $sql_check = "SELECT `LABEL_ALIMENT` FROM `nourriture` INNER JOIN `fait_de` ON nourriture.ID_ALIMENT = fait_de.ID_ALIMENT WHERE fait_de.QUANTITE > :MaxQTE AND fait_de.ID_NUTRIMENT = :ID_N GROUP BY nourriture.ID_ALIMENT";
         $exe_check = $db->prepare($sql_check);
         $exe_check->bindParam(':ID_N', $data->ID_N, PDO::PARAM_INT);
