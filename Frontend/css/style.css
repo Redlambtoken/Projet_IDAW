@@ -14,8 +14,7 @@ body {
   margin: 0 !important;
   padding: 0 !important;
   display:flex;
-  height: 100px;
-  background-color: brown;
+  height: 150px;
 }
 
 .logo{
@@ -23,7 +22,7 @@ body {
 }
 
 .content{
-  background-color: #0dcaf0;
+  background-color: #0df055;
   flex-grow: 1;
 }
 

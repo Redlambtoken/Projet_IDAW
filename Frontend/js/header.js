@@ -1,3 +1,4 @@
+//Script du menu déroulant
 document.addEventListener('DOMContentLoaded', event => {
 
     const sidebarWrapper = document.getElementById('sidebar-wrapper');
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', event => {
             menuToggleTimes.classList.add('fa-bars');
         }
     }
-
+/*
 // Scroll to top button appear
     document.addEventListener('scroll', () => {
         const scrollToTop = document.body.querySelector('.scroll-to-top');
@@ -48,27 +49,44 @@ document.addEventListener('DOMContentLoaded', event => {
                 scrollToTopVisible = false;
             }
         }
-    })
+    })*/
 })
-function fadeOut(el) {
-    el.style.opacity = 1;
-    (function fade() {
-        if ((el.style.opacity -= .1) < 0) {
-            el.style.display = "none";
-        } else {
-            requestAnimationFrame(fade);
-        }
-    })();
-};
 
-function fadeIn(el, display) {
-    el.style.opacity = 0;
-    el.style.display = display || "block";
-    (function fade() {
-        var val = parseFloat(el.style.opacity);
-        if (!((val += .1) > 1)) {
-            el.style.opacity = val;
-            requestAnimationFrame(fade);
+// Citation
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+$(document).ready(function(){
+    $.ajax({
+        url: '../backend/CitationAPI.php', // URL du script PHP
+        method: 'GET', // Méthode GET pour récupérer des données
+        dataType: 'json', // Type de données attendu
+        
+        success: function(data) {
+            console.log(data);
+            // Vérifier s'il y a une erreur
+            if (data.error) {
+                alert("Erreur : " + data.error);
+                return;
+            }
+            let numéroCitation = getRandomIntInclusive(0, data.length-1);
+
+            // Vider le conteneur avant d'afficher les nouvelles données
+            $('#citation').empty();
+
+            // Afficher la première donnée dans le conteneur
+            $('#citation').append('<p>' + data[numéroCitation].CITATION_TEXT+'</p>'); // Ajoute dans l'avis le texte et le nom de la personne
+
+        },   
+        error: function(jqXHR, textStatus, errorThrown) {
+        
         }
-    })();
-};
+    });
+});
+
+
+
