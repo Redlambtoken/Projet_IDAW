@@ -209,6 +209,7 @@ function getRecette($db,$json){
 function createRecette($db,$json){
     $data = json_decode($json);value: 
     if((isset($data->nameR)) && $_SESSION["user_login"] != null && (isset($data->IDas)) && (isset($data->Qtes))){
+        if($data->nameR != "" && !empty($data->Qtes) && !empty($data->IDas)){
         $sql = "INSERT INTO `nourriture_perso`(`LABEL_ALIMENT_PERSO`,`ID_UTILISATEUR`) VALUES (:nameR,:IDUtilisateur)";
         $exe = $db->prepare($sql);
         $exe->bindParam(':nameR', $data->nameR, PDO::PARAM_STR);
@@ -256,6 +257,6 @@ function createRecette($db,$json){
             }
         }
         return 201;
-    }
+    }}
     return 401;
 }
