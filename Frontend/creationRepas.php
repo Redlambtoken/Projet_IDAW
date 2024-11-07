@@ -240,7 +240,7 @@ Créer un nouveaux repas
 </form>
 </table>
 <div id="repas"></div>
-<div id="panier"></div>
+<div id="panier"><button onclick="SentPanier()">submit</button></div>
 
 <script>
     $(document).ready(function(){
@@ -259,16 +259,16 @@ Créer un nouveaux repas
                     data :{
                         ID_CAT: $('#inputCat').val()
                     },
-
                     success:function(data){
-                        console.log("data");
+                        console.log(data);
                         console.log("la requête est validé");
-                        $('#repas').empty;
+                        $('#repas').empty();
 
                         data.forEach(function(item){
                             int++;
-                            let aliment = JSON.parse(item);
-                            $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
+                            console.log("oui");
+                            //let aliment = JSON.parse(item);
+                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -288,12 +288,12 @@ Créer un nouveaux repas
 
                     success:function(data){
                         console.log(data);
-                        $('#repas').empty;
+                        //$('#repas').empty();
 
                         data.forEach(function(item){
-                            let nom=JSON.parse
+                            //let nom=JSON.parse
                             int++;
-                            $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
+                            $('#repas').append('<button id=repas'+int+'>'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -312,12 +312,12 @@ Créer un nouveaux repas
 
                     success:function(data){
                         console.log(data);
-                        $('#repas').empty;
+                        //$('#repas').empty();
 
                         data.forEach(function(item){
                             nomRepas(item);
                             int++;
-                            $('#repas').append('<button id=repas'+int+' onclick="repasPanier()" nom="'+nom+'">'+nom+'</button>')
+                            $('#repas').append('<button id=repas'+int+' onclick="repasPanier(this)" nom="'+item.LABEL_ALIMENT+'">'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -325,7 +325,6 @@ Créer un nouveaux repas
                     },
                 })
             }   
-
         })
     })
 
@@ -333,9 +332,42 @@ function nomRepas(data){
     const nom = JSON.parse(data);
 }
 
-function repasPanier(){
-
+function repasPanier(item){
+    console.log(item);
+    $('#panier').append('<button class="SelectedRepas" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
 }
     
+function SupprimerRepas(item){
+    //on supprime le repas
+    item.remove();
+}
+
+function SentPanier(){
+    event.preventDefault();
+    let array = document.getElementsByClassName("SelectedRepas");
+    let arrayID = [];
+    let arrayQuantite = [];
+    for(j=0; j< array.length; j++){
+        let Exist = -1;
+        for(i = 0; i<arrayID.length; i++){
+            console.log("i -> " + i);
+            console.log("j -> " + j);
+            console.log("arrayID[i] = " + arrayID[i]);
+            console.log("array[j].id = " + array[j].id)
+            if(arrayID[i] == array[j].id){
+                Exist = i;
+                break;
+            }
+        }
+        if(Exist != -1){
+            arrayQuantite[Exist]++;
+        }
+        else{
+            arrayID.push(array[j].id);
+            arrayQuantite.push(1);
+        }
+    }
+    
+}
 
 </script>
