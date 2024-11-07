@@ -28,6 +28,7 @@
             </select>
         </label>
         <div id="repas"></div>
+        <div id="repasGoal"></div>
     </div>
 </div>
 <br>
@@ -137,6 +138,53 @@ $(document).ready(function(){
             }
         }
     })
+})
+
+$(document).ready(function(){
+    $.ajax({ 
+            url: "../backend/calendeatCalculAPI.php",
+            method: "GET",    
+            success: function(data) {
+                if (data.error) {
+                alert("Erreur : " + data.error);
+                    return;
+                }
+                console.log("qilsugdfhj");
+                console.log(data);
+
+                if (data && Object.keys(data).length === 0) {
+                    alert("Aucun résultat trouvé.");
+                }
+                let array = {}; //array[0][] -> ID nutriment array[][0] -> Quantite array[][1] -> GOAL
+                let i =0;
+                data.forEach(function(item){
+                    if(array[item.ID_NUTRIMENT] == null){
+                        array[item.ID_NUTRIMENT] = [Number(item.QUANTITE),Number(item.GOAL), item.LABEL_NUTRIMENT] ;
+                    }
+                    else {
+                        array[item.ID_NUTRIMENT][0] += Number(item.QUANTITE);
+                    }
+                })
+
+                Object.keys(array).forEach(function(key) {
+                    $rest = array[key][1] - array[key][0];
+                    if($rest<= 0){
+                        console.log("BIEN");
+                    }
+                    else{
+                        $('#repasGoal').append('<div>Tu dois encore manger '+ $rest + " en " + array[key][2] +'</div>')
+                    }
+                });
+                /*array.forEach(element => {
+                    if(element[1] - element[0] <= 0){
+                        
+                    }
+                    else{
+                        $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
+                    }
+                });*/
+            }
+        })
 })
 
 //afficher les repas en fonction de la valeur du menu déroulant
