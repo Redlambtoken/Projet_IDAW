@@ -256,20 +256,18 @@ Créer un nouveaux repas
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
-                    dataType: "json",
-                    contentType:"application/json",
                     data :{
                         ID_CAT: $('#inputCat').val()
                     },
 
                     success:function(data){
-                        console.log("la requête est valide");
-                        console.log(data);
+                        console.log("data");
+                        console.log("la requête est validé");
                         $('#repas').empty;
 
                         data.forEach(function(item){
-                            let nom=JSON.parse
                             int++;
+                            let aliment = JSON.parse(item);
                             $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
                         })
                     },
@@ -282,8 +280,6 @@ Créer un nouveaux repas
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
-                    dataType: "json",
-                    contentType:"application/json",
                     data :{
                         ID_CAT: $('#inputCat').val(),
                         ID_SCAT: $('#inputCat2').val(),
@@ -309,8 +305,6 @@ Créer un nouveaux repas
                 $.ajax({
                     url:"../backend/recettesAPI.php",
                     method: "GET",
-                    dataType: "json",
-                    contentType:"application/json",
                     data :{
                         ID_CAT: $('#inputCat').val(),
                         ID_SCAT: $('#inputCat2').val()
