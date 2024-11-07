@@ -20,8 +20,8 @@
         </tr>
     </table>
 </form>
-
 <p style="color: red; font-style: italic;">* : champ obligatoire</p>
+<div id="text"></div>
 </div>
 <script>
     $(document).ready(function(){
@@ -31,12 +31,9 @@
             // Vérifier que les champs ne sont pas vides
             const login = $("#inputLogin").val();
             const pwd = $("#inputPwd").val();
-            console.log($("#inputPwd").val());
-            
             
             // Hachage du mot de passe avec MD5
             const pwdMD5 = CryptoJS.MD5(pwd).toString();
-            console.log($("#pwdMD5").val());
 
             // Envoi de la requête AJAX
             $.ajax({ 
@@ -49,15 +46,16 @@
                     password: pwdMD5
                 }),
                 success: function(response) {
-                    alert(response);
                     if (response === 200) {
                         window.location.href = 'pageCompte.php';
                     } else if (response === 400) {
-                        alert("Login ou mot de passe incorrect");
+                        $("#text").empty;
+                        $("#text").append('<p>Login ou mot de passe nnon valide</p>')
                     }
                 },
                 error: function() {
-                    alert("Une erreur est survenue lors de la connexion. Veuillez réessayer.");
+                    $("#text").empty;
+                    $("#text").append("Une erreur est survenue lors de la connexion. Veuillez réessayer.");
                 }
             });
         });
