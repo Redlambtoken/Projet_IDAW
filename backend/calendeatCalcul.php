@@ -9,7 +9,7 @@ if($_SESSION["user_login"] != null){
         LEFT JOIN `fait_de` AS fd ON fd.ID_NUTRIMENT = da.ID_apport
         LEFT JOIN `contient` AS c ON c.ID_ALIMENT = fd.ID_ALIMENT
         LEFT JOIN `repas` AS r ON r.ID_REPAS = c.ID_REPAS AND r.ID_UTILISATEUR = :user_id
-        WHERE da.ID_SPORT = :idsport AND da.ID_SEXE = :idsexe AND da.ID_AGE = :idage AND (r.DATE_REPAS > :date_repas OR r.DATE_REPAS IS NULL)
+        WHERE da.ID_SPORT = :idsport AND da.ID_SEXE = :idsexe AND da.ID_AGE = :idage AND (r.DATE_REPAS = :date_repas OR r.DATE_REPAS IS NULL)
         GROUP BY da.ID_apport
         ORDER BY n.LABEL_NUTRIMENT";
     $exe = $db->prepare($sql);
@@ -20,9 +20,6 @@ if($_SESSION["user_login"] != null){
     $exe->bindParam(':idsport', $_SESSION["user_sport"], PDO::PARAM_INT);
     $exe->execute();
     $res = $exe->fetchAll(PDO::FETCH_OBJ);
-
-   
-
     return $res;
 }
 return 400;

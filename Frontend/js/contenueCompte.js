@@ -65,14 +65,14 @@ $(document).ready(function(){
             }
             console.log(data);
 
-            $('#repas').empty();
+            $('#repasAccount').empty();
 
             if (data && Object.keys(data).length === 0) {
                 //alert("Aucun résultat trouvé.");
             } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
+                    $('#repasAccount').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -152,14 +152,14 @@ $(document).ready(function(){
                 console.log("oui");
                 console.log(data);
 
-                $('#repas').empty();
+                $('#repasAccount').empty();
 
                 if (data && Object.keys(data).length === 0) {
                     //alert("Aucun résultat trouvé.");
                 } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
+                    $('#repasAccount').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -184,14 +184,14 @@ $(document).ready(function(){
                 console.log("oui");
                 console.log(data);
 
-                $('#repas').empty();
+                $('#repasAccount').empty();
 
                 if (data && Object.keys(data).length === 0) {
                     //alert("Aucun résultat trouvé.");
                 } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
+                    $('#repasAccount').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {

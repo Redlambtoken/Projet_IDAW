@@ -3,10 +3,11 @@ html, body {
 }
 
 body {
-  margin: 0, serif !important;
-  padding: 0, serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
+  background-color: #e7e7e7 !important;
 }
 
 
@@ -15,7 +16,7 @@ body {
   padding-bottom: 20px !important;
   display:flex;
   height: 150px;
-  background-color: white !important;
+  background-color: #e7e7e7 !important;
 }
 
 .logo{
@@ -42,6 +43,7 @@ body {
   border-radius: 20px; /* Coin en bas à gauche */
 }
 
+
 .row{
   margin: 0 !important;
   padding: 0 !important;
@@ -53,7 +55,6 @@ body {
 }
 
 .form-container {
-  display: flex;
   flex-direction: column; /* Par défaut, alignement vertical */
   width: auto;
   background: white; /* Couleur de fond du formulaire */
@@ -66,6 +67,7 @@ body {
       flex-direction: row; /* Alignement horizontal sur grands écrans */
       align-items: flex-start; /* Alignement des éléments en haut */
       justify-content: space-around;
+      background-color: #e7e7e7 !important;
   }
   .rating-container {
       margin-right: 20px; /* Espace entre les étoiles et le champ de texte */
@@ -122,7 +124,7 @@ button:hover {
   width: 150px;           /* Largeur fixe */
   height: 50px;           /* Hauteur fixe */
   border: 2px solid black; /* Bordure noire */
-  background-color: #ffffff; /* Couleur de fond */
+  background-color: #e7e7e7 !important;
   color: rgb(0, 0, 0);           /* Couleur du texte */
   border-radius: 5px;     /* Coins arrondis, facultatif */
   text-align: center;     /* Centre le texte horizontalement */
@@ -140,7 +142,8 @@ button:hover {
   display:flex;
   text-align: center;
   flex-direction: column;
-  
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; 
 }
 
 .fleche{

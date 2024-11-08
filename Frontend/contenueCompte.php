@@ -27,14 +27,14 @@
                 <option value="13">de deux semaines</option>
             </select>
         </label>
-        <div id="repas"></div>
+        <div id="repasAccount"></div>
         <div id="repasGoal"></div>
     </div>
 </div>
 <br>
 <div>
-    Donner mon avis sur le site
     <form id="ratingForm" class="form-container">
+    <h3>Donner mon avis sur le site</h3>
     <div class="zoneText">
         <textarea id="Text" name="comment" placeholder="Laissez un commentaire..."></textarea>
         <button type="submit">Envoyer</button>
