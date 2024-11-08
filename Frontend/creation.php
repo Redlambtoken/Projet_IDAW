@@ -157,7 +157,7 @@
                                 name : $("#inputNom").val(),
                                 prenom : $("#inputPrenom").val(),
                                 Login: $("#inputLogin").val(),
-                                year : $("#inputDate").val(),
+                                year : $("#inputDate").val().split("-")[0],
                                 email : $("#inputEmail").val(),
                                 password : pwdMD5
                             }),
