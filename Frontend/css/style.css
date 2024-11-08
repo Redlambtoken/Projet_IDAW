@@ -118,6 +118,22 @@ button:hover {
   background-color: #0056b3; /* Couleur de fond au survol */
 }
 
+.uneRecette{
+  width: 150px;           /* Largeur fixe */
+  height: 50px;           /* Hauteur fixe */
+  border: 2px solid black; /* Bordure noire */
+  background-color: #ffffff; /* Couleur de fond */
+  color: rgb(0, 0, 0);           /* Couleur du texte */
+  border-radius: 5px;     /* Coins arrondis, facultatif */
+  text-align: center;     /* Centre le texte horizontalement */
+  display: inline-block;  /* Permet de contrôler la taille du bouton */
+  cursor: pointer;        /* Change le curseur sur le bouton */
+  font-size: 16px;        /* Taille de police */
+  overflow: hidden;       /* Cache le texte s'il dépasse */
+  white-space: nowrap;    /* Empêche le retour à la ligne */
+  padding: 10px;
+}
+
 
 .footer{
   height: auto;

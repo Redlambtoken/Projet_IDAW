@@ -1,10 +1,12 @@
-<h1>Créer un nouveaux repas</h1>
+<h1 style="padding-top:10px;text-align:center">Créer un nouveau repas</h1>
+<br>
 <table>
 <form id="formRepas" action="">
-    <h2>Recherche par catégorie</h2>
+    <h2 style="padding-bottom:15px">Recherche par catégorie</h2>
+
 <div>
-    <label for="Catégorie">Catégorie n°1 : </label>
-    <select id="inputCat" name="catégorie" style="">
+    <label for="Catégorie"style="padding-bottom:10px">Catégorie n°1 : </label>
+    <select id="inputCat" name="catégorie" >
         <option value="0">Insérer valeur</option>
         <option value="1">entrees et plats composes</option>
         <option value="2">fruits, legumes, legumineuses et oleagineux</option>
@@ -19,7 +21,7 @@
         <option value="11">aliments infantiles</option>
     </select>
     <br>
-    <label for="SCatégorie">Catégorie n°2 : </label>
+    <label for="SCatégorie" style="padding-bottom:10px">Catégorie n°2 : </label>
     <select id="inputCat2" name="scatégorie">
         <option value="0">Insérer valeur</option>
         <option value="63">Céréales et biscuits infantiles</option>
@@ -87,7 +89,7 @@
         <option value="4">pizzas, tartes et crepes salees</option>
     </select>
     <br>
-    <label for="SSCatégorie">Catégorie n°3 : </label>
+    <label for="SSCatégorie"style="padding-bottom:10px">Catégorie n°3 : </label>
     <select id="inputCat3" name="sscatégorie">
         <option value="0">Insérer une valeur</option>
         <option value="10">Légumes crus</option>
@@ -234,13 +236,14 @@
     </select>
     <label for="chiffre"> < </label>
     <input type="number" id="chiffre" name="chiffre">
-    <br>
 </div>
-<button id="bouton" type="submit">Rechercher</button>   
+<div style="padding:10px"></div>
+<button id="bouton" type="submit" style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:150px">Rechercher</button>   
 </form>
 </table>
 <div id="repas"></div>
 <div id="panier"></div>
-<div id="ajouterRepas"><button>submit</button></div>
+<div id="ajouterRepas" style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:150px;float: right;
+    margin-right: 20px"><button>Créer le repas</button></div>
 
 <script src="js/creationRepas.js"></script>
