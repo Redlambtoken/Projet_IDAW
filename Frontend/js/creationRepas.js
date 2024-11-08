@@ -19,18 +19,13 @@ let panier=[];
                     },
 
                     success:function(data){
-                        console.log(data);
-                        console.log("la requête est validé");
-                        const content =JSON.parse(data);
-                        console.log(content);
-                        $('#repas').empty;
+                        $('#repas').empty();
 
                         data.forEach(function(item){
                             int++;
-                            let aliment = JSON.parse(item);
+
                             console.log(item);
-                            $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
-                        })
+                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
                     },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
@@ -49,13 +44,11 @@ let panier=[];
 
                     success:function(data){
                         console.log(data);
-                        $('#repas').empty;
+                        $('#repas').empty();
 
                         data.forEach(function(item){
-                            let nom=JSON.parse
                             int++;
-                            $('#repas').append('<button id=repas'+int+'>'+nom+'</button>')
-                        })
+                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
                     },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
@@ -73,19 +66,15 @@ let panier=[];
 
                     success:function(data){
                         console.log(data);
-                        $('#repas').empty;
+                        $('#repas').empty();
 
                         data.forEach(function(item){
-                            nomRepas(item);
                             if(int===0){
-                                $('#repas').append('<button id="submitButton">Valider</button>')
                                 int++;
-                                $('#repas').append('<button id=repas'+int+' onclick="repasPanier()" nom="'+nom+'">'+nom+'</button>')
-                            }
+                                $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
                             else{
                                 int++;
-                                $('#repas').append('<button id=repas'+int+' onclick="repasPanier()" nom="'+nom+'">'+nom+'</button>')
-                            }
+                                $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
                         })
                     },
                     error: function(xhr, status, error) {
@@ -97,32 +86,62 @@ let panier=[];
         })
     })
 
-function nomRepas(data){
-    const nom = JSON.parse(data);
+//ajouter un repas au panier
+function repasPanier(item){
+    $('#panier').append('<button class="SelectedRepas" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
 }
 
-//ajouter un repas au panier
-function repasPanier(){
-    panier.push(nom);
-    $("#panier").append()
+function SupprimerRepas(item){
+    //on supprime le repas
+    item.remove();
 }
 
 //créer un repas
 $(document).ready(function(){
     const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
     $('#ajouterRepas').on('click', function(event) {
+        let array = document.getElementsByClassName("SelectedRepas");
+        console.log(array);
+        let arrayID = [];
+        let arrayQuantite = [];
+        for(j=0; j< array.length; j++){
+            let Exist = -1;
+            for(i = 0; i<arrayID.length; i++){
+                console.log("i -> " + i);
+                console.log("j -> " + j);
+                console.log("arrayID[i] = " + arrayID[i]);
+                console.log("array[j].id = " + array[j].id)
+                if(arrayID[i] == array[j].id){
+                    Exist = i;
+                    break;
+                }
+            }
+            if(Exist != -1){
+                arrayQuantite[Exist]++;
+            }
+            else{
+                arrayID.push(array[j].id);
+                arrayQuantite.push(1);
+            }
+        }
         event.preventDefault();
         $.ajax({
-            url: 'calendeatAPI.php', // Remplacez par l'URL de votre fichier PHP ou API
+            url: '../backend/calendeatAPI.php', // Remplacez par l'URL de votre fichier PHP ou API
             method: 'POST',          // Utilisez 'GET' si votre API ou serveur attend une requête GET
             dataType: 'json',
+            contentType: 'application/json',
             data:JSON.stringify({
-                date: currentDate,
-                repas: panier
+                date: formattedDate,
+                recettes: arrayID,
+                QTEs : arrayQuantite
             }),
             
-            sucess:function(data){
-                $('#panier').empty;
+            success:function(data){
+                $('#panier').empty();
                 $('#panier').append('<p>Votre repas a bien été enregistrée');
             },
 

@@ -31,29 +31,29 @@ function createEat($db, $json){ //peut-être enlevé les fetch car ils ne sont p
     if(isset($data->recettes) && $_SESSION["user_login"] != null && isset($data->QTEs)){ //on va recevoir un token JWT
         
         if(isset($data->date)){ //on va recevoir un token JWT
-            $sql = "INTO `repas`(`ID_UTILISATEUR`, `DATE_REPAS`) VALUES (:ID_UTILISATEUR,:DATE_REPAS)"; //l'ID Utilisateur va être envoyé par Suzanne-Léonore
+            $sql = "INSERT INTO `repas`(`ID_UTILISATEUR`, `DATE_REPAS`) VALUES (:ID_UTILISATEUR,:DATE_REPAS)"; //l'ID Utilisateur va être envoyé par Suzanne-Léonore
             $exe = $db->prepare($sql);
             $exe->bindParam(':DATE_REPAS', $data->date , PDO::PARAM_STR);
             $exe->bindParam(':ID_UTILISATEUR', $_SESSION["user_id"], PDO::PARAM_INT);
             $exe->execute();
         }
         else {
-            $sql = "INTO `repas`(`ID_UTILISATEUR`, `DATE_REPAS`) VALUES (:ID_UTILISATEUR,:DATE_REPAS)"; //l'ID Utilisateur va être envoyé par Suzanne-Léonore
+            $sql = "INSERT INTO `repas`(`ID_UTILISATEUR`, `DATE_REPAS`) VALUES (:ID_UTILISATEUR,:DATE_REPAS)"; //l'ID Utilisateur va être envoyé par Suzanne-Léonore
             $exe = $db->prepare($sql);
             $exe->bindParam(':DATE_REPAS', date("Y-m-d") , PDO::PARAM_STR);
             $exe->bindParam(':ID_UTILISATEUR', $_SESSION["user_id"], PDO::PARAM_INT);
             $exe->execute();
         }
 
-        $sqlSearchID = "SELECT ID_REPAS FROM `repas` ORDER BY `ID_REPAS` DESC LIMIT 1;";
+        $sqlSearchID = "SELECT ID_REPAS FROM `repas` ORDER BY `ID_REPAS` DESC LIMIT 1";
         $exe_checkID = $db->prepare($sqlSearchID);
         $exe_checkID->execute();    
-        $result = $exe_checkID->fetch(PDO::FETCH_OBJ)['ID_REPAS'];
+        $result = $exe_checkID->fetch(PDO::FETCH_OBJ);
 
         foreach($data->recettes as $index => &$recette){ //à voir si on m'envois les ID des recettes ou les Noms des recettes
             $sql = "INSERT INTO `contient`(`ID_REPAS`, `ID_ALIMENT`, `NUMBER`) VALUES (:ID_REPAS,:ID_ALIMENT,:quantite);";
             $exe = $db->prepare($sql);
-            $exe->bindParam(':ID_REPAS', $result, PDO::PARAM_INT);
+            $exe->bindParam(':ID_REPAS', $result->ID_REPAS, PDO::PARAM_INT);
             $exe->bindParam(':ID_ALIMENT', $recette, PDO::PARAM_INT);
             $exe->bindParam(':quantite', $data->QTEs[$index], PDO::PARAM_INT);
             $exe->execute();
