@@ -1,15 +1,13 @@
 # Calend'eat
 
-## Instalation and configuration
-
 ## API Utilisation
 
-#### https://{URL_Front}/LoginAPI.php
+#### https://{URL_API}/LoginAPI.php
 
-##### GET :
+##### POST :
 
 Connection
-With the HTTP method GET on https://{URL_Front}/LoginAPI.php you will need to add a json in the body to connect yourself to the website, a json like
+With the HTTP method GET on https://{URL_API}/LoginAPI.php you will need to add a json in the body to connect yourself to the website, a json like
 ```json
 {
     "login":"toto",
@@ -21,10 +19,8 @@ if the login or the password is incorrect, you will get a 404 HTTP Response
 if you succeed to connect yourself, you will get a 200 HTTP Response
 after a connection a session will start to keep the login, name and ID of the user
 
-##### POST
-
 Create User
-With the HTTP method POST on https://{URL_Front}/LoginAPI.php you will need a json to create a user, a json like :
+With the HTTP method POST on https://{URL_API}/LoginAPI.php you will need a json to create a user, a json like :
 ```json
 {
     "sexe": "2",
@@ -41,50 +37,36 @@ if a param is missing, you will get a 400 HTTP Response
 if the email is already use, you will get a 409 HTTP Response 
 if you succeed to create a user, you will get a 201 HTTP Response
 
-##### PUT :
-
-Connection
-With the HTTP method PUT on https://{URL_Front}/LoginAPI.php you will need to add a json in the body to connect yourself to the website, a json like
-```json
-{
-    "password":"tata"
-}
-```
-if the login or the password is missing, you will get a 400 HTTP Response
-if the login or the password is incorrect, you will get a 404 HTTP Response 
-if you succeed to connect yourself, you will get a 200 HTTP Response
-
-
-#### https://{URL_Front}/avisAPI.php
+#### https://{URL_API}/avisAPI.php
 
 ##### GET :
 
-With the https://{URL_Front}/avisAPI.php you will get all the avis in the database
+With the https://{URL_API}/avisAPI.php you will get all the avis in the database
 
 ##### POST
 
 Create Avis
-With the HTTP method POST on https://{URL_Front}/avisAPI.php you will need a json to create and have a session open, the json will be like :
+With the HTTP method POST on https://{URL_API}/avisAPI.php you will need a json to create and have a session open, the json will be like :
 ```json
 {
-    "Text" : "oihsqdfuihqsdfpuhqsdofuihqsfoiu",
-    "nameAuteur" : "Dad"
+    "Text" : "Nice website <3",
+    "Note" : "5"
 }
 ```
-If you don't put "Text" or "nameAuteur" you will get a 400 error bad request
+If you don't put "Text" or "Note" you will get a 400 error bad request
 If you create your avis correctly you will get a 201 HTTP Response
 
-#### https://{URL_Front}/calendeatAPI.php
+#### https://{URL_API}/calendeatAPI.php
 
 ##### GET :
 
-With the https://{URL_Front}/calendeatAPI.php you will need a session and you can get all of your "repas" from the database.
-If use a query param "day" and a session you will get all of your repas from the last {days} (https://{URL_Front}/calendeatAPI.php?day={days}) 
+With the https://{URL_API}/calendeatAPI.php you will need a session and you can get all of your "repas" from the database.
+If use a query param "day" and a session you will get all of your repas from the last {days} (https://{URL_API}/calendeatAPI.php?day={days}) 
 
 ##### POST
 
 Create Avis
-With the HTTP method POST on https://{URL_Front}/calendeatAPI.php you will need a json to create and have a session open, the json will be like :
+With the HTTP method POST on https://{URL_API}/calendeatAPI.php you will need a json to create and have a session open, the json will be like :
 ```json
 {
     "date" : "YYYY-mm-dd",
@@ -92,23 +74,42 @@ With the HTTP method POST on https://{URL_Front}/calendeatAPI.php you will need 
         1,
         5,
         5
+    ],
+    "QTEs" : [
+        1,
+        25
+        3
     ]
 }
 ```
 recettes -> ID of the recipe in your meal
-If you don't put "recettes" you will get a 400 error bad request ("date" is facultative)
+QTEs -> Number of the recipe with the same index (Recettes[0] -> QTEs[0]) 
+If you don't put "recettes" or "QTEs" you will get a 400 error bad request ("date" is facultative)
 If you create your repas correctly you will get a 201 HTTP Response
 
-#### https://{URL_Front}/recettesAPI.php
+#### https://{URL_API}/recettesAPI.php
 
 ##### GET :
 
-With the https://{URL_Front}/recettesAPI.php you will need a session and you will get all the recette and your personal recette
+With the https://{URL_API}/recettesAPI.php you will need a session and you will get all the recette and your personal recette if you don't vie ID_CAT or ID_SCAT or ID_SSCAT in a json body.
+If you did, you will get the "aliment" with the ID corresponding.
+You can add "name" or ID_N and MaxQTE to get "aliment" with their name or their nutriments and a maximum of this nutriment.
+The json will be like :
+```json
+{
+    "ID_CAT" : "2",
+    "ID_SCAT" : "17",
+    "ID_SSCAT" : "62",
+    "names" : "pata",
+    "ID_N" : "5",
+    "MaxQTE" : "45"
+}
+```
 
 ##### POST
 
 Create Avis
-With the HTTP method POST on https://{URL_Front}/recettesAPI.php you will need a json to create and have a session open, the json will be like :
+With the HTTP method POST on https://{URL_API}/recettesAPI.php you will need a json to create and have a session open, the json will be like :
 ```json
 {
     "nameR" : "Raclette",
@@ -133,3 +134,15 @@ IDas -> list of the aliments in your "recette" (We need their ID)
 Qtes -> quantity for each aliments
 IDCat, IDSCat, IDSSCat -> ID of category
 If you create your repas correctly you will get a 201 HTTP Response
+
+#### https://{URL_API}/CitationAPI.php
+
+##### GET :
+
+With the https://{URL_API}/recettesAPI.php you will need a session and you will get all the citations
+
+#### https://{URL_API}/calendeatCalculAPI.php
+
+##### GET :
+
+With the https://{URL_API}/recettesAPI.php you will need a session and you will get all the nutriment you need to eat during this day and the quantity of each
