@@ -1,10 +1,12 @@
-<h1>Créer un nouveaux repas</h1>
+<h1 style="padding-top:10px;text-align:center">Créer un nouveau repas</h1>
+<br>
 <table>
 <form id="formRepas" action="">
-    <h2>Recherche par catégorie</h2>
+    <h2 style="padding-bottom:15px">Recherche par catégorie</h2>
+
 <div>
-    <label for="Catégorie">Catégorie n°1 : </label>
-    <select id="inputCat" name="catégorie" style="">
+    <label for="Catégorie"style="padding-bottom:10px">Catégorie n°1 : </label>
+    <select id="inputCat" name="catégorie" >
         <option value="0">Insérer valeur</option>
         <option value="1">entrees et plats composes</option>
         <option value="2">fruits, legumes, legumineuses et oleagineux</option>
@@ -19,7 +21,7 @@
         <option value="11">aliments infantiles</option>
     </select>
     <br>
-    <label for="SCatégorie">Catégorie n°2 : </label>
+    <label for="SCatégorie" style="padding-bottom:10px">Catégorie n°2 : </label>
     <select id="inputCat2" name="scatégorie">
         <option value="0">Insérer valeur</option>
         <option value="63">Céréales et biscuits infantiles</option>
@@ -87,7 +89,7 @@
         <option value="4">pizzas, tartes et crepes salees</option>
     </select>
     <br>
-    <label for="SSCatégorie">Catégorie n°3 : </label>
+    <label for="SSCatégorie"style="padding-bottom:10px">Catégorie n°3 : </label>
     <select id="inputCat3" name="sscatégorie">
         <option value="0">Insérer une valeur</option>
         <option value="10">Légumes crus</option>
@@ -234,17 +236,18 @@
     </select>
     <label for="chiffre"> < </label>
     <input type="number" id="chiffre" name="chiffre">
-    <br>
 </div>
-<button id="bouton" type="submit">Rechercher</button>   
+<div style="padding:10px"></div>
+<button id="bouton" type="submit" style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:150px">Rechercher</button>   
 </form>
 </table>
-<div id="repas"></div>
-<div id="panier"><button onclick="SentPanier()">submit</button></div>
+<div style="padding:10px"></div>
+<div id="iciRepas"></div>
+<button style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:150px;float: right;
+    margin-right: 20px" onclick="SentPanier()">Créer le repas</button>
+<div id="panier"></div>
 
-<<<<<<< HEAD
 <script src="js/creationRepas.js"></script>
-=======
 <script>
     $(document).ready(function(){
         console.log("OUI");
@@ -265,13 +268,13 @@
                     success:function(data){
                         console.log(data);
                         console.log("la requête est validé");
-                        $('#repas').empty();
+                        $('#iciRepas').empty();
 
                         data.forEach(function(item){
                             int++;
                             console.log("oui");
                             //let aliment = JSON.parse(item);
-                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')
+                            $('#iciRepas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+' class="uneRecette">'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -296,7 +299,7 @@
                         data.forEach(function(item){
                             //let nom=JSON.parse
                             int++;
-                            $('#repas').append('<button id=repas'+int+'>'+item.LABEL_ALIMENT+'</button>')
+                            $('#iciRepas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+' class="uneRecette">'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -320,7 +323,7 @@
                         data.forEach(function(item){
                             nomRepas(item);
                             int++;
-                            $('#repas').append('<button id=repas'+int+' onclick="repasPanier(this)" nom="'+item.LABEL_ALIMENT+'">'+item.LABEL_ALIMENT+'</button>')
+                            $('#iciRepas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+' class="uneRecette">'+item.LABEL_ALIMENT+'</button>')
                         })
                     },
                     error: function(xhr, status, error) {
@@ -337,7 +340,7 @@ function nomRepas(data){
 
 function repasPanier(item){
     console.log(item);
-    $('#panier').append('<button class="SelectedRepas" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
+    $('#panier').append('<button class="SelectedRepas uneRecette" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
 }
     
 function SupprimerRepas(item){
@@ -372,6 +375,4 @@ function SentPanier(){
     }
     
 }
-
 </script>
->>>>>>> 66678151f75b47e8086ae5368a6f4e9d64b4539a
