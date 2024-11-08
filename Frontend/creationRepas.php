@@ -1,10 +1,10 @@
-Créer un nouveaux repas
+<h1>Créer un nouveaux repas</h1>
 <table>
 <form id="formRepas" action="">
-    Recherche recette
+    <h2>Recherche par catégorie</h2>
 <div>
     <label for="Catégorie">Catégorie n°1 : </label>
-    <select id="inputCat" name="catégorie">
+    <select id="inputCat" name="catégorie" style="">
         <option value="0">Insérer valeur</option>
         <option value="1">entrees et plats composes</option>
         <option value="2">fruits, legumes, legumineuses et oleagineux</option>

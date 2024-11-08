@@ -219,6 +219,10 @@ h3{
   justify-content: center;
 }
 
+#repasGoal{
+  padding-top: 10px;
+}
+
 #NbrJour{
   height: auto;
 }
