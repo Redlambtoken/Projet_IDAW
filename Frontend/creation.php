@@ -40,7 +40,7 @@
                 <br>
                 <br>
                 <label for="sexe">Sexe* : </label>
-                <select id="inputSexe" name="sexe" required>
+                <select id="inputSexe" name="sexe" width="20px" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Femme</option>
                     <option value="2">Homme</option>
@@ -49,7 +49,7 @@
                 <br>
                 <br>
                 <label for="sport">Sport* : </label>
-                <select id="inputSport" name="sport" required>
+                <select id="inputSport" name="sport" width="20px" required>
                     <option value="0">Insérer valeur</option>
                     <option value="1">Bas</option>
                     <option value="2">Moyen</option>
@@ -68,10 +68,7 @@
     <br>
     <div id="texte"></div>
 
-    
-<<<<<<< HEAD
     <script src="js/creation.js"></script>
-=======
     <script>
         $(document).ready(function() {
             $('#inputPwd, #inputPwd2').on('keyup', function(e) {
@@ -181,4 +178,3 @@
                 }) 
             });
         </script>
->>>>>>> 66678151f75b47e8086ae5368a6f4e9d64b4539a

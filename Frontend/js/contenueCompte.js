@@ -72,7 +72,7 @@ $(document).ready(function(){
             } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
+                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -159,7 +159,7 @@ $(document).ready(function(){
                 } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
+                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {
@@ -191,7 +191,7 @@ $(document).ready(function(){
                 } else {
             
                 data.forEach(function(item){
-                    $('#repas').append('<div>'+item.LABEL_ALIMENT + "<-" + item.DATE_REPAS+'</div>')
+                    $('#repas').append('<div>'+item.DATE_REPAS+ " : " +item.LABEL_ALIMENT +'</div>')
                 })
             
             /*data.forEach(function(item) {

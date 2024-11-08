@@ -12,9 +12,10 @@ body {
 
 .header{
   margin: 0 !important;
-  padding: 0 !important;
+  padding-bottom: 20px !important;
   display:flex;
   height: 150px;
+  background-color: white !important;
 }
 
 .logo{
@@ -22,20 +23,23 @@ body {
 }
 
 .content{
-  background-color: #0df055;
-  flex-grow: 1;
+  flex: 1;
+  padding-top:15px;
 }
 
 #citation{
   display: flex;
+  flex-direction: row;
   text-align: center;
   height: auto;
-  background-color: blue;
+  background-color: rgb(39, 199, 178);
   justify-content: center;
   font-family: 'Poppins', sans-serif;
   font-size:xx-large;
-  color: rgb(244, 4, 4);
-  margin-bottom: 15px;
+  color: rgb(0, 0, 0);
+  padding-top: 30px;
+  padding-bottom: 15px;
+  border-radius: 20px; /* Coin en bas à gauche */
 }
 
 .row{
@@ -116,12 +120,16 @@ button:hover {
 
 
 .footer{
+  height: auto;
   display:flex;
-  flex-wrap: wrap;
-  background-color: green;
   text-align: center;
   flex-direction: column;
   
+}
+
+.fleche{
+  width: 40px;
+  height: 40px;
 }
 
 #boutongauche{
@@ -129,13 +137,16 @@ button:hover {
   border: none;
   padding: 0;
   cursor: pointer;
+  float: left;
 }
+
 
 #boutondroite{
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  float: right;
 }
 
 .bouton img{
@@ -148,25 +159,26 @@ button:hover {
 
 .avis{
   display:flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: #0dcaf0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 .contenu{
 display : flex;
 flex-direction: column;
-background-color: #114d5f;
 height: auto;
 }
 
 #texte{
-  justify-content: center;
+  text-align: center;
+  flex: 1;
+  background-color: #74d691;
+  border-radius: 20px;
 }
 
 #milieu{
-  background-color: aquamarine;
-
+  
 }
 
 h1{
@@ -190,6 +202,7 @@ h3{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding:20px;
 }
 
 .presentationRepas{
@@ -197,6 +210,13 @@ h3{
   flex-direction: column;
   flex-wrap: wrap;
   justify-content:flex-start;
+}
+
+#repas{
+  background-color: burlywood;
+  border-radius:10px;
+  width:auto;
+  justify-content: center;
 }
 
 #NbrJour{

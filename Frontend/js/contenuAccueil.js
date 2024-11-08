@@ -43,13 +43,13 @@ $(document).ready(function(){
                     indice=indice-1
                     $('#texte').empty();
                     let opinion = afficherAvis(data,indice);
-                    $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    $('#texte').append('<p>' + opinion[0] + '</p> <p>' + opinion[1] + '</p>');
                 }
                 else{
                     indice=data.length-1;
                     $('#texte').empty();
                     let opinion = afficherAvis(data,indice);
-                    $('#texte').append('<p>' + opinion[0] + '</p> <br><p>' + opinion[1] + '</p>');
+                    $('#texte').append('<p>' + opinion[0] + '<br>' + opinion[1] + '</p>');
                 }
             });
 
