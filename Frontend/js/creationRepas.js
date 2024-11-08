@@ -25,7 +25,7 @@ let panier=[];
                             int++;
 
                             console.log(item);
-                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
+                            $('#repas').append('<button onclick="repasPanier(this)" class="uneRecette" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
                     },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
@@ -48,7 +48,7 @@ let panier=[];
 
                         data.forEach(function(item){
                             int++;
-                            $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
+                            $('#repas').append('<button onclick="repasPanier(this)" class="uneRecette" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                        })
                     },
                     error: function(xhr, status, error) {
                         $('#remarques').append('<p>NON Une erreur est survenue, nous n\'avons pas pu enregistrer votre avis</p>')
@@ -71,10 +71,10 @@ let panier=[];
                         data.forEach(function(item){
                             if(int===0){
                                 int++;
-                                $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
+                                $('#repas').append('<button onclick="repasPanier(this)" class="uneRecette" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
                             else{
                                 int++;
-                                $('#repas').append('<button onclick="repasPanier(this)" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
+                                $('#repas').append('<button onclick="repasPanier(this)" class="uneRecette" id='+item.ID_ALIMENT+'>'+item.LABEL_ALIMENT+'</button>')                            }
                         })
                     },
                     error: function(xhr, status, error) {
@@ -88,7 +88,7 @@ let panier=[];
 
 //ajouter un repas au panier
 function repasPanier(item){
-    $('#panier').append('<button class="SelectedRepas" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
+    $('#panier').append('<button class="SelectedRepas uneRecette" onclick="SupprimerRepas(this)" id="'+item.id+'" nom="'+item.textContent+'">'+item.textContent+'</button>')
 }
 
 function SupprimerRepas(item){

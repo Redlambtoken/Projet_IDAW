@@ -243,7 +243,7 @@
 </table>
 <div id="repas"></div>
 <div id="panier"></div>
-<div id="ajouterRepas" style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:150px;float: right;
+<div id="ajouterRepas" style="padding-top:15px;padding-bottom:15px;border-radius:20px;width:auto;float: right;
     margin-right: 20px"><button>Créer le repas</button></div>
 
 <script src="js/creationRepas.js"></script>

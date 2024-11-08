@@ -229,10 +229,12 @@ h3{
 }
 
 #repas{
-  background-color: burlywood;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   border-radius:10px;
   width:auto;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 #repasGoal{
