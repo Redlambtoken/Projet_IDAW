@@ -28,7 +28,7 @@ return 400;
 function createEat($db, $json){ //peut-être enlevé les fetch car ils ne sont pas hyper utiles
     $data = json_decode($json);
     //il me faut une ou des recettes
-    if(isset($data->recettes) && $_SESSION["user_login"] != null){ //on va recevoir un token JWT
+    if(isset($data->recettes) && $_SESSION["user_login"] != null && isset($data->QTEs)){ //on va recevoir un token JWT
         
         if(isset($data->date)){ //on va recevoir un token JWT
             $sql = "INTO `repas`(`ID_UTILISATEUR`, `DATE_REPAS`) VALUES (:ID_UTILISATEUR,:DATE_REPAS)"; //l'ID Utilisateur va être envoyé par Suzanne-Léonore
@@ -50,11 +50,12 @@ function createEat($db, $json){ //peut-être enlevé les fetch car ils ne sont p
         $exe_checkID->execute();    
         $result = $exe_checkID->fetch(PDO::FETCH_OBJ)['ID_REPAS'];
 
-        foreach($data->recettes as &$recette){ //à voir si on m'envois les ID des recettes ou les Noms des recettes
-            $sql = "INSERT INTO `contient`(`ID_REPAS`, `ID_ALIMENT`) VALUES (:ID_REPAS,:ID_ALIMENT);";
+        foreach($data->recettes as $index => &$recette){ //à voir si on m'envois les ID des recettes ou les Noms des recettes
+            $sql = "INSERT INTO `contient`(`ID_REPAS`, `ID_ALIMENT`, `NUMBER`) VALUES (:ID_REPAS,:ID_ALIMENT,:quantite);";
             $exe = $db->prepare($sql);
             $exe->bindParam(':ID_REPAS', $result, PDO::PARAM_INT);
             $exe->bindParam(':ID_ALIMENT', $recette, PDO::PARAM_INT);
+            $exe->bindParam(':quantite', $data->QTEs[$index], PDO::PARAM_INT);
             $exe->execute();
         }
         return 201;
