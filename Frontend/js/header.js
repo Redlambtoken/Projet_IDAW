@@ -62,9 +62,9 @@ function getRandomIntInclusive(min, max) {
 
 $(document).ready(function(){
     $.ajax({
-        url: '../backend/CitationAPI.php', // URL du script PHP
-        method: 'GET', // Méthode GET pour récupérer des données
-        dataType: 'json', // Type de données attendu
+        url: '../backend/CitationAPI.php', 
+        method: 'GET', 
+        dataType: 'json', 
         
         success: function(data) {
             console.log(data);

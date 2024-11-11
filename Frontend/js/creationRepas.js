@@ -130,8 +130,8 @@ $(document).ready(function(){
         }
         event.preventDefault();
         $.ajax({
-            url: '../backend/calendeatAPI.php', // Remplacez par l'URL de votre fichier PHP ou API
-            method: 'POST',          // Utilisez 'GET' si votre API ou serveur attend une requête GET
+            url: '../backend/calendeatAPI.php', 
+            method: 'POST',          
             dataType: 'json',
             contentType: 'application/json',
             data:JSON.stringify({

@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#inputPwd, #inputPwd2').on('keyup', function(e) {
 
         if($('#inputPwd').val() != '' && $('#inputPwd2').val() != '' && $('#inputPwd').val() != $('#inputPwd2').val()){
-            $('#passwordStrength').removeClass().addClass('alert alert-error').html('Passwords do not match!');
+            $('#passwordStrength').removeClass().addClass('alert alert-error').html('Les mots de passes ne crrespondent pas!');
             return false;
         }
 
@@ -16,17 +16,17 @@ $(document).ready(function() {
         let okRegex = new RegExp("(?=.{12,}).*", "g");
 
         if (okRegex.test($(this).val()) === false) {
-            // If ok regex doesn't match the password
+            // Controle nombre caractère
             $('#passwordStrength').removeClass().addClass('alert alert-error').html('Le mot de passe doit contenir au moins 12');
 
         } else if (strongRegex.test($(this).val())) {
-            // If reg ex matches strong password
+            // Le mot de passe est assez fort
             $('#passwordStrength').removeClass().addClass('alert alert-success').html('Mot de passe valide');
         } else if (mediumRegex.test($(this).val())) {
-            // If medium password matches the reg ex
+            // Ajouter des caractères spèciaux
             $('#passwordStrength').removeClass().addClass('alert alert-info').html('Renforcez votre mot de passe avec des caractères spéciaux');
         } else {
-            // If password is ok
+            // Rajouter des majuscules
             $('#passwordStrength').removeClass().addClass('alert alert-error').html('Mot de passe faible : rajouter des majuscule');
         }
 
